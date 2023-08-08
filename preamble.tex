@@ -24,6 +24,9 @@
 % Styling 
 % ====
 
+% Changes footnote markers to symbols (dagger, double dagger, etc.)
+% \usepackage[symbol]{footmisc} 
+
 % Equation numbering by section, subsection.
 \numberwithin{equation}{section} % this command comes from amsmath
 \renewcommand{\theequation}{\arabic{section}.\arabic{equation}} 
@@ -61,15 +64,14 @@
 \renewcommand*{\marginfont}{\footnotesize}
 \renewcommand*{\raggedleftmarginnote}{\flushleft}
 
-% Number any equation.
-\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
 
 % ----
 % Page headers using fancyhdr
 % ----
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-\fancyhead[L]{\fontfamily{phv}\selectfont \leftmark }
+\fancyhead[L]{\fontfamily{phv}\selectfont NEUTRON STAR COOLING}
 \fancyhead[C]{}
 \fancyhead[R]{\thepage}
 \fancyfoot[L,R,C]{}
@@ -97,8 +99,9 @@
 }
 
 \usepackage{caption} % to add captions to figures inside mdframed environment
-\usepackage[symbol]{footmisc}
 
+
+% Bold script maths variables
 \DeclareMathAlphabet{\mathscrbf}{OMS}{mdugm}{b}{n}
 \newcommand{\Jscr}{\mathscr{J}}
 \newcommand{\Jscrb}{\mathscr{J}}
@@ -110,10 +113,7 @@
 % monospace 
 \def\code#1{\texttt{#1}}
 
-\makeatother
-
-\renewcommand{\d}{\ensuremath{\textrm{d}}}
-
+% \makeatother
 % ----
 % Problem/solution environments
 % ----
@@ -133,13 +133,10 @@
 
 \newmdenv[style=blue,backgroundcolor=lblue!20!white]{problem}
 
-\renewcommand{\theenumi}{\alph{enumi}}
-\renewcommand{\labelenumi}{(\theenumi)}
-\renewcommand{\theenumii}{\roman{enumii}}
-\renewcommand{\labelenumii}{(\theenumii)}
-
-\newcommand{\pvec}{\bm{p}}
-
+% \renewcommand{\theenumi}{\alph{enumi}}
+% \renewcommand{\labelenumi}{(\theenumi)}
+% \renewcommand{\theenumii}{\roman{enumii}}
+% \renewcommand{\labelenumii}{(\theenumii)}
 
 %====
 % MACROS
@@ -169,3 +166,15 @@
     \vspace{7px}
     \subsection{#1}
 }
+
+% ----
+% Physics
+% ----
+\newcommand{\pvec}{\bm{p}}
+
+
+% ----
+% Labels 
+% ----
+% Number any equation.
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}

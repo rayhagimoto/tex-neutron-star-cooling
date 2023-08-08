@@ -1,8 +1,8 @@
 %===
 % SUBSECTION: A different approach taken from nuclear physics
 %===
-\vspace{7px}
-\subsection{A recursive expression for phase space integrals}\label{subsec:recursive-relation}
+\subsec{A recursive expression for phase space integrals}
+\label{subsec:recursive-relation}
 The following regurgitates parts of~\cite{Byckling:1969sx,Isaacson:2021xty}.
 The problem I ran into at the end of the last section was how to use the energy-momentum delta functions to restrict the bounds of integration. Ref.~\cite{Byckling:1969sx} provides a means to circumvent this problem by performing a change of variables. 
 Consider the phase space integral $R_n(p_a + p_b)$ defined by (where $p_i$ now denotes a four-momentum vector in constrast to the previous section where it represented a three-momentum magnitude.)
@@ -49,11 +49,12 @@ Repeated application of \eref{eq:recursive-phase-space-relation} yields
 \end{aligned}
 \end{equation}
 
-% WHICH IS MORE USEFUL TO SHOW? N = 3 OR N = 5? PROBABLY N =5.
-The important case for me is $n = 3$:
+The important case for me is when $n = 3$:
+\begin{bluenv}{Phase space measure for $n = 3$}
 \begin{equation}
+    \label{eq:recursive-LIPS-3}
 \begin{aligned}
-    R_3(s) = 
+    R_3(s) = \int \dd \Phi_3(s) = 
         \int_{(m_1 + m_2)^2}^{(\sqrt{s} - m_3)^2} \dd M_{2}^2 
         \int \dd \Omega_3 \,
         \frac{\lambda (s, M^2_{2}, m_3^2)}{8s} \,
@@ -61,34 +62,12 @@ The important case for me is $n = 3$:
         \frac{\lambda (M^2_2, m_1^2, m_2^2)}{8 M_2^2} \; .
 \end{aligned}
 \end{equation}
+\end{bluenv}
 It's easy to verify that the number of integration variables matches our expectation of $3(3) - 4 = 5$ since we are integrating over one invariant mass, and two pairs of two angles. 
 
 In the above discussion we have considered $p_a$ and $p_b$ to be fixed.
 However, for my purposes I will also be integrating over $p_a$ and $p_b$.
 This case seems to be similar to the one considered in~\cite{Isaacson:2021xty} (cf. the example given between their eqs. (12) and (13)).
-% Since we are integrating over both ingoing and outgoing momenta we need the formula for $n = 5$ with $s = 0$. This is because in our case we have a $\delta$ function of the form $\delta^4(p_a + p_b - p_1 - p_2 - p_3)$ but we are also integrating over $p_a$ and $p_b$. Relabel $p_a \rightarrow - k_1$, $p_b \rightarrow - k_2$, and $p_i \rightarrow k_{i + 2}$. Then,
-% \begin{align*}
-%     \delta^4(p_a + p_b - p_1 - p_2 - p_3) \rightarrow \delta^4(0 - k_1 - k_2 - k_3 - k_4 - k_5)
-% \end{align*}
-% which motivates the need for $R_n(s = 0)$.
-% \begin{equation}
-% \begin{aligned}
-%     R_5(s) = 
-%         & \int_{(m_1 + m_2 + m_3 + m_4)^2}^{(\sqrt{s} - m_4)^2} \dd M_{4}^2 
-%             \int \dd \Omega_5 \,
-%             \frac{\sqrt{\lambda (s, M^2_{4}, m_5^2)}}{8s} \\
-%         & \times 
-%             \int_{(m_1 + m_2 + m_3)^2}^{(M_4 - m_4)^2} \dd M_{3}^2 
-%             \int \dd \Omega_4 \,
-%             \frac{\sqrt{\lambda (M^2_4, M^2_3, m_4)}}{8 M^2_4} \\
-%         & \times
-%             \int_{(m_1 + m_2)^2}^{(M_3 - m_3)^2} \dd M_{2}^2 
-%             \int \dd \Omega_3 \,
-%             \frac{\sqrt{\lambda (M^2_3, M^2_2, m_3)}}{8 M^2_3}
-%             \int \dd \Omega_2 \,
-%             \frac{\sqrt{\lambda (M^2_2, m_1^2, m_2^2)}}{8 M_2^2} \; .
-% \end{aligned}
-% \end{equation}
 
 \footnotetext{In eq. (3) of~\cite{Byckling:1969sx} the authors allude that the angular $\dd \Omega$ integrals can be performed. They do not perform the integrals because \emph{``the variables defining a momentum vector should appear explicitly if a Monte Carlo method is to be applied for the generation of events.''} In my case I think that we still can't do these integrals trivially because the matrix element depends on them, although I'm not 100\% sure if this is correct.}
 
@@ -102,23 +81,32 @@ This case seems to be similar to the one considered in~\cite{Isaacson:2021xty} (
 %====
 % SUBSECTION: Writing the integral in terms of momentum transfers 
 %====
-\vspace{7px}
-\subsection{Writing integral in terms of momentum transfers}\label{subsec:momentum-transfers}
+\subsec{Writing integral in terms of momentum transfers}
+\label{subsec:momentum-transfers}
 
 In sec~\ref{subsec:recursive-relation} we wrote the phase space integral in terms of invariant masses and angles of the three-momenta $\bm{p}_i$ defined in the center-of-mass frame where $\sum_{k=1}^{i} p_k = (M_{i}, \bm{0})$. 
 The matrix element in \eref{eq:matrix-element} is a function of the Lorentz invariants $(p_a \cdot p_1), \; (p_b \cdot p_3), \; (p_2 \cdot p_3)$, and $(p_b \cdot p_2) = (- (p_a - p_1 - p_2 - p_3) \cdot p_2)$. 
-It is cumbersome to write this matrix element explicitly in terms of the angles $\{ (\theta_i, \varphi_i) : i = 1, 2, \ldots, n\}$ so we would rather use kinematic Lorentz invariants analogous to the Mandelstam variables for $2 \rightarrow 2$ scattering.
+It is cumbersome to write this matrix element explicitly in terms of the angles $\{ (\theta_i, \varphi_i) : i = 1, 2, \ldots, n\}$ so we would rather use kinematic Lorentz invariants analogous to the Mandelstam variables for $2 \rightarrow 2$ scattering\footnotemark.
 To this end it is convenient to introduce the so-called `momentum transfers' $t_i \equiv Q_i^2 \equiv (p_a - p_1 - \cdots - p_i)^2 = (p_n + p_{n-1} + \cdots + p_{i + 1} - p_b)^2$.
 
-Some of the dot products may be written exclusively in terms of the kinematic variables. For example,
+\footnotetext{At least, I think that is the motivation for introducing these variables.}
+
+Some of the dot products (but not all) may be written exclusively in terms of the kinematic variables. For example,
 \begin{gather*}
     \begin{align*}
-        t_1 &\equiv (p_a - p_1)^2 &&\rightarrow &&2 p_a \cdot p_1 = m_a^2 +  m_1^2 - t_1 \\
-        t_2 &\equiv (p_a - (p_1 + p_2))^2 &&\rightarrow &&2 p_a \cdot p_2 = M_2^2 - m_1^2 + t_1 - t_2 \\
-        t_3 &\equiv (p_a - (p_1 + p_2 + p_3))^2 &&\rightarrow &&2 p_a \cdot p_3 = M_3^2 - M_2^2 + t_2 \\
-        M_2^2 &\equiv (p_1 + p_2)^2 &&\rightarrow &&2 p_1 \cdot p_2 = M_2^2 - m_1^2 - m_2^2 \\
-        M_3^2 &\equiv (p_1 + p_2 + p_3)^2 &&\rightarrow &&2 (p_1 + p_2) \cdot p_3 = M_3^2 - 2 M_2^2 + m_1^2 + m_2^2 - m_3^2 \\
-    \end{align*}
+        t_1 &\equiv (p_a - p_1)^2 &&\rightarrow 
+        && 2 p_a \cdot p_1 = m_a^2 +  m_1^2 - t_1 \\
+        t_2 &\equiv (p_a - (p_1 + p_2))^2 &&\rightarrow 
+        && 2 p_a \cdot p_2 = M_2^2 - m_1^2 + t_1 - t_2 \\
+        t_3 &\equiv (p_a - (p_1 + p_2 + p_3))^2 &&\rightarrow 
+        && 2 p_a \cdot p_3 = M_3^2 - M_2^2 + t_2 \\
+        M_2^2 &\equiv (p_1 + p_2)^2 &&\rightarrow 
+        && 2 p_1 \cdot p_2 = M_2^2 - m_1^2 - m_2^2 \\
+        M_3^2 &\equiv (p_1 + p_2 + p_3)^2 &&\rightarrow 
+        && 2 (p_1 + p_2) \cdot p_3 = M_3^2 - 2 M_2^2 + m_1^2 + m_2^2 - m_3^2 
+    \end{align*}\\
+    2 p_b \cdot p_3 = 2 (p_1 + p_2) \cdot p_3 + 2 m_3^2  - 2 p_a \cdot p_3 =
+    m_1^2 + m_2^2 + m_3^2 - M_2^2 - t_2
 \end{gather*}
 However I was unable to write $p_2 \cdot p_3$ in terms of the invariants alone. 
 $p_b \cdot p_2$ is really just $p_2 \cdot p_3$ in disguise so it has the same problem.

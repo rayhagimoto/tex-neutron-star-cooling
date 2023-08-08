@@ -1,17 +1,18 @@
 %===
 % SECTION: Introduction
 %===
-\section{Introduction}\label{sec:introduction}
+\section{Introduction}
+\label{sec:introduction}
 The goal of this project is to evaluate the integral 
 
 %---
 % emissivity integral
 %---
-\begin{bluenv}{}
+\begin{bluenv}{Emissivity integral}
     \begin{equation}
     \label{eq:emissivity-integral}
     \begin{aligned}
-        \dd \varepsilon_{3'} = 
+        \varepsilon_{3'} = \int 
             & f_1 f_2 (1 - f_{1'}) (1 - f_{2'}) (1 + f_{3'}) \\
             &\times E_{3'} \,
             \sum_{\sigma, \sigma'} | \mathcal{M} |^2 \,
@@ -42,22 +43,29 @@ is the Lorentz-invariant phase space measure, and
 \end{equation*}
 is the Fermi-Dirac distribution. 
 The spin-summed matrix element squared is given by
-\begin{equation}
-    \label{eq:matrix-element}
-    \sum_{\sigma, \sigma'} | \mathcal{M} |^2 
-        = 
-        \frac{128 \, g^2_{ae\mu} e^4}{(m_1^2 - m_{1'}^2)^2} \,
-        \frac{
-             (p_1 \cdot p_{1'} - m_1 m_{1'})
-            (p_2 \cdot p_{3'})
-            (p_{2'} \cdot p_{3'})
-        }
-        {
-            (p_2 - p_{2'})^4
-        } \; \, .
-\end{equation}
+\begin{bluenv}{Spin-summed matrix element}
+    \begin{equation}
+        \label{eq:matrix-element}
+        \sum_{\sigma, \sigma'} | \mathcal{M} |^2 
+            = 
+            \frac{128 \, g^2_{ae\mu} e^4}{(m_1^2 - m_{1'}^2)^2} \,
+            \frac{
+                 (p_1 \cdot p_{1'} - m_1 m_{1'})
+                (p_2 \cdot p_{3'})
+                (p_{2'} \cdot p_{3'})
+            }
+            {
+                (p_2 - p_{2'})^4
+            } \; \, .
+    \end{equation}
+\end{bluenv}
 
+
+%====
+% SUBSECTION: Direct integration
+%====
 \subsec{Integration in terms of momentum variables (didn't work)}
+\label{subsec:direct-momentum-integration}
 \emph{The first strategy I used to evaluate this integral was to do the integration directly in terms of the momentum variables. Below are the notes I wrote detailing my strategy.}
 
 We can use the momentum conserving Dirac delta to evaluate the $\bm{p}_{2'}$ integral, setting

@@ -3,8 +3,13 @@
 %===
 \subsec{A recursive expression for phase space integrals}
 \label{subsec:recursive-relation}
-The following regurgitates parts of~\cite{Byckling:1969sx,Isaacson:2021xty}.
-The problem I ran into at the end of the last section was how to use the energy-momentum delta functions to restrict the bounds of integration. Ref.~\cite{Byckling:1969sx} provides a means to circumvent this problem by performing a change of variables. 
+The problem I ran into at the end of the last section was how to use the energy-momentum delta functions to restrict the bounds of integration. 
+I spent some time searching the literature for useful references and the most promising were refs.~\cite{James:1968gu,Byckling:1969sx,Isaacson:2021xty}.
+\cite{James:1968gu} provides an introduction to Monte Carlo methods and discusses the phase space measure in sec. 9, which covers several ways to deal with the Dirac delta in the phase space integration measure by doing appropriate changes of variables.
+The most useful method, is covered in sec. 9.6 and is the same one used in \cite{Byckling:1969sx}. 
+Ref.~\cite{Byckling:1969sx} extends the treatment in sec. 9.6 of~\cite{James:1968gu} by also introducing momentum transfer variables. 
+My understanding is that this is appropriate when your matrix element is flat in terms of the momentum transfers.
+
 Consider the phase space integral $R_n(p_a + p_b)$ defined by (where $p_i$ now denotes a four-momentum vector in constrast to the previous section where it represented a three-momentum magnitude.)
 \begin{align}
     R_n(p_a + p_b) = 
@@ -74,7 +79,7 @@ This case seems to be similar to the one considered in~\cite{Isaacson:2021xty} (
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.6\linewidth]{figs/recursion-diagram.jpg}
-    \caption{Illustration of the recursion relation as a sequence of effective $2 \rightarrow 2$ scattering events.}
+    \caption{Illustration of the recursion relation as a sequence of effective $2 \rightarrow 2$ scattering events (this diagram is largely based on pg. 26 of \cite{James:1968gu}).}
     \label{fig:recursion-diagram}
 \end{figure}
 

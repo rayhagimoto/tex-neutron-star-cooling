@@ -3,8 +3,6 @@
 % ====
 \usepackage{hyperref}
 \usepackage{graphicx}
-\usepackage{parskip}
-\setlength{\parskip}{3ex}
 \usepackage{todonotes}
 \usepackage{marginnote}
 \usepackage[margin=1.5in]{geometry}
@@ -16,29 +14,41 @@
 % Math stuff
 \usepackage{amsmath, amsfonts, bbold}
 \usepackage{physics}
-% Fancy script capitals
-\usepackage{mathrsfs}
-\usepackage{cancel}
-% Bold math
-\usepackage{bm}
-\usepackage{enumitem}
-\usepackage{siunitx}
 
-% colours
+\usepackage{mathrsfs} % Fancy script capitals
+\usepackage{cancel}
+\usepackage{bm} % bold maths
+\usepackage{enumitem}
+
+% ====
+% Styling 
+% ====
+
+% Equation numbering by section, subsection.
+\numberwithin{equation}{section} % this command comes from amsmath
+\renewcommand{\theequation}{\arabic{section}.\arabic{equation}} 
+
+% New paragraphs aren't indented.
+\usepackage{parskip}
+\setlength{\parskip}{3ex}
+
+% ----
+% Colours
+% ----
+\usepackage{xcolor, soul}
 \definecolor{correct}{HTML}{009900}
-\newcommand\correct[2]{\ensuremath{\:}{\color{red}{#1}}\ensuremath{\to }{\color{correct}{#2}}\ensuremath{\:}}
-\newcommand\green[1]{{\color{correct}{#1}}}
 \DeclareMathSymbol{\shortminus}{\mathbin}{AMSa}{"39}
 
-\usepackage{xcolor, soul}
 \definecolor{lblue}{RGB}{102,204,255}
 \colorlet{soulblue}{lblue!30}
 \sethlcolor{soulblue}
 
-\usepackage{wrapfig}
-
+% ----
+% Section headers
+% -----
 \usepackage{sectsty}
 \usepackage[scaled=.92]{helvet}
+
 \sectionfont{\fontfamily{phv}\selectfont}
 \subsectionfont{\fontfamily{phv}\selectfont}
 \usepackage{titlesec}
@@ -54,7 +64,9 @@
 % Number any equation.
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 
-% fancy headers
+% ----
+% Page headers using fancyhdr
+% ----
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhead[L]{\fontfamily{phv}\selectfont \leftmark }
@@ -64,30 +76,36 @@
 
 \setlength{\headheight}{14pt}
 
+% ====
+% Custom environments
+% ====
+
+% ----
+% Blue boxes!
+% ----
 \usepackage{mdframed}
 \mdfsetup{skipabove=0pt,skipbelow=3pt}
-\global\mdfdefinestyle{blue}{%
-%nobreak=true,
-topline=false, rightline=false,bottomline=false,
-linecolor=lblue!85!white, linewidth=2.5pt,
-subtitlebackgroundcolor=lblue!30!white,
-backgroundcolor=lblue!30!white,
-skipabove=10pt,skipbelow=10pt
+\global\mdfdefinestyle{blue}{
+    topline=false, 
+    rightline=false,
+    bottomline=false,
+    linecolor=lblue!85!white, 
+    linewidth=2.5pt,
+    subtitlebackgroundcolor=lblue!30!white,
+    backgroundcolor=lblue!30!white,
+    skipabove=10pt,skipbelow=10pt
 }
 
-\usepackage{mdframed}
 \usepackage{caption} % to add captions to figures inside mdframed environment
-\usepackage{simpler-wick}
 \usepackage[symbol]{footmisc}
-\usepackage{mathrsfs, amsmath}
 
 \DeclareMathAlphabet{\mathscrbf}{OMS}{mdugm}{b}{n}
 \newcommand{\Jscr}{\mathscr{J}}
 \newcommand{\Jscrb}{\mathscr{J}}
 
 \newenvironment{bluenv}[1]
-{\begin{mdframed}[style=blue, frametitle=#1]}
-{\end{mdframed}}
+    {\begin{mdframed}[style=blue, frametitle=#1]}
+    {\end{mdframed}}
 
 % monospace 
 \def\code#1{\texttt{#1}}
@@ -96,10 +114,22 @@ skipabove=10pt,skipbelow=10pt
 
 \renewcommand{\d}{\ensuremath{\textrm{d}}}
 
-% UNCOMMENT BELOW FOR PROBLEM SOLUTION ENVIRONMENTS
-\newmdenv[topline=false, rightline=false, bottomline=false, leftline=false,
-innertopmargin=5pt, innerleftmargin=0pt,innerrightmargin=0pt, innerbottommargin=10pt,
-backgroundcolor=white,frametitle=Solution,frametitlefont=\normalfont\itshape]{solution}
+% ----
+% Problem/solution environments
+% ----
+\newmdenv[
+    topline=false, 
+    rightline=false,
+    bottomline=false,
+    leftline=false,
+    innertopmargin=5pt,
+    innerleftmargin=0pt,
+    innerrightmargin=0pt,
+    innerbottommargin=10pt,
+    backgroundcolor=white,
+    frametitle=Solution,
+    frametitlefont=\normalfont\itshape]
+    {solution}
 
 \newmdenv[style=blue,backgroundcolor=lblue!20!white]{problem}
 
@@ -115,6 +145,9 @@ backgroundcolor=white,frametitle=Solution,frametitlefont=\normalfont\itshape]{so
 % MACROS
 %====
 
+% -----
+% References
+% -----
 % Equations
 \newcommand{\eref}[1]{eq.~(\ref{#1})}
 \newcommand{\Eref}[1]{Eq.~(\ref{#1})}
@@ -126,3 +159,13 @@ backgroundcolor=white,frametitle=Solution,frametitlefont=\normalfont\itshape]{so
 % Figures
 \newcommand{\fref}[1]{fig.~(\ref{#1})}
 \newcommand{\Fref}[1]{Fig.~(\ref{#1})}
+
+% -----
+% Subsections, environments
+% -----
+
+% Subsection command so I don't have to adjust the leading whitespace every time. There is definitely a better way to do this...
+\newcommand{\subsec}[1]{%
+    \vspace{7px}
+    \subsection{#1}
+}

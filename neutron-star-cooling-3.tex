@@ -1,0 +1,57 @@
+%====
+% SECTION: Monte Carlo Integration
+%====
+\section{Monte Carlo integration}\label{sec:monte-carlo-integration}
+
+%===
+% SUBSEC: Introduction
+%===
+\subsection{The basics}\label{subsec:mc-basics}
+Suppose you are interested in evaluating the integral 
+\begin{align}
+    I = \int_a^b f(x) \, \dd x.
+\end{align}
+The most obvious method of approximating this is with a Riemann sum or trapezoidal integration where you divide the domain into bins of width $\Delta x$ and calculate the area of a rectangle or trapezoid using the values of $f$ at the bin edges. 
+
+Monte Carlo integration, on the other hand, takes a a different approach altogether whereby points in the domain are sampled at random and the integral is approximated as an average. 
+To see this, note that the average value of $f$ on the domain is
+\begin{align}
+    \langle f \rangle = \frac{1}{b - a} \int_a^b f(x)\, \dd x = \frac{I}{b - a}.
+\end{align}
+The average $\langle f \rangle$ can be approximated by uniformly sampling $N$ i.i.d random numbers $x_i$ on the domain $x \in [a, b]$ where $i \in {1, 2, ..., N}$ and calculating the mean of $f(x_i)$:
+\begin{align}
+    \langle f \rangle \approx \langle f \rangle_N \equiv \frac{1}{N}\sum_{i = 1}^{N} f(x_i).
+\end{align}
+Therefore we can approximate the integral $I$ as
+\begin{align}
+    I \approx (b - a) \langle f \rangle_N.
+\end{align}
+This argument can be extended to higher dimensions, i.e. in $n$ dimensions we have
+\begin{align}
+    I = \int_V f(\bm{x}) \, \dd^n x = V \langle f \rangle.
+\end{align}
+One important result is that this strategy always converges as $N^{-1/2}$ in all dimensions, whereas techniques like trapezoidal integration converge rapidly in one dimension ($N^{-2}$), but significantly slower for higher dimensions ($N^{-2/n}$). For example in 5 dimensions, trapezoidal integration converges like  $N^{-2/5}$, which is slower than Monte Carlo integration.
+
+%===
+% SUBSEC: Importance sampling
+%===
+\vspace{7px}
+\subsection{Importance sampling}\label{subsec:mc-importance-sampling}
+In sec. \ref{subsec:mc-basics} we sampled $x$ uniformly at random on the domain of integration. However, we can choose to sample $x$ from any arbitrary distribution $p(x)$ and compute the same expectation value by weighting the sample $f(x)$ by $1 / p(x)$ so that
+\begin{align}
+    I \approx \frac{V}{N}\sum_{i=1}^{N} \frac{f(x_i)}{p(x_i)}.
+\end{align}
+With an appropriate choice of $p$ our Monte Carlo integration technique can be made to converge significantly faster than by sampling $x$ uniformly at random. 
+To see why this is, suppose $f(x) = e^{-x^2}$ and $[a,b] = [-1000, 1000]$. 
+Sampling uniformly on $[-1000, 1000]$ means that the majority of points we pick will be in the tails of the Gaussian and will hardly affect the value of the integral. 
+If instead we sampled from a standard normal distribution we would mostly choose $x$ values near the peak at $x = 0$ and our result would converge much more rapidly.
+Clearly the choice of $p$ is heavily dependent on the particular shape of the integrand $f$. 
+\hl{The Metropolis-Hastings algorithm is one way to generate samples $x$ from $p(x)$ and can be used for importance sampling.}
+
+\underline{VEGAS algorithm:}
+
+The discussion of the VEGAS algorithm at \url{https://www.ippp.dur.ac.uk/~krauss/Lectures/QuarksLeptons/Basics/PS_Vegas.html} is quite good. In case the link breaks in the future I reproduce some of the main points below.
+\begin{quotation}
+    ``The VEGAS algorithm starts by dividing the $n$-dimensional hypercube $[0,1]^n$ into smaller ones -- usually of identical size -- and performs a sampling in each of them. 
+    The results are then used to refine the integration grid for the next iteration of the sampling procedure.''
+\end{quotation}

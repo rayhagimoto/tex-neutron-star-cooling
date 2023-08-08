@@ -1,0 +1,128 @@
+% ====
+% BASIC PACKAGES
+% ====
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{parskip}
+\setlength{\parskip}{3ex}
+\usepackage{todonotes}
+\usepackage{marginnote}
+\usepackage[margin=1.5in]{geometry}
+
+% Hide page number when page is empty
+% \usepackage{empheq}
+% \usepackage{breqn}
+
+% Math stuff
+\usepackage{amsmath, amsfonts, bbold}
+\usepackage{physics}
+% Fancy script capitals
+\usepackage{mathrsfs}
+\usepackage{cancel}
+% Bold math
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{siunitx}
+
+% colours
+\definecolor{correct}{HTML}{009900}
+\newcommand\correct[2]{\ensuremath{\:}{\color{red}{#1}}\ensuremath{\to }{\color{correct}{#2}}\ensuremath{\:}}
+\newcommand\green[1]{{\color{correct}{#1}}}
+\DeclareMathSymbol{\shortminus}{\mathbin}{AMSa}{"39}
+
+\usepackage{xcolor, soul}
+\definecolor{lblue}{RGB}{102,204,255}
+\colorlet{soulblue}{lblue!30}
+\sethlcolor{soulblue}
+
+\usepackage{wrapfig}
+
+\usepackage{sectsty}
+\usepackage[scaled=.92]{helvet}
+\sectionfont{\fontfamily{phv}\selectfont}
+\subsectionfont{\fontfamily{phv}\selectfont}
+\usepackage{titlesec}
+\titlespacing*{\subsection}
+{0px}{0px}{0.5ex}
+\titlespacing{\subsection}
+{0pt}{0.25ex}{0.5ex}
+
+%make margin notes on left side and make the font size the same as footnote
+\renewcommand*{\marginfont}{\footnotesize}
+\renewcommand*{\raggedleftmarginnote}{\flushleft}
+
+% Number any equation.
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% fancy headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[L]{\fontfamily{phv}\selectfont \leftmark }
+\fancyhead[C]{}
+\fancyhead[R]{\thepage}
+\fancyfoot[L,R,C]{}
+
+\setlength{\headheight}{14pt}
+
+\usepackage{mdframed}
+\mdfsetup{skipabove=0pt,skipbelow=3pt}
+\global\mdfdefinestyle{blue}{%
+%nobreak=true,
+topline=false, rightline=false,bottomline=false,
+linecolor=lblue!85!white, linewidth=2.5pt,
+subtitlebackgroundcolor=lblue!30!white,
+backgroundcolor=lblue!30!white,
+skipabove=10pt,skipbelow=10pt
+}
+
+\usepackage{mdframed}
+\usepackage{caption} % to add captions to figures inside mdframed environment
+\usepackage{simpler-wick}
+\usepackage[symbol]{footmisc}
+\usepackage{mathrsfs, amsmath}
+
+\DeclareMathAlphabet{\mathscrbf}{OMS}{mdugm}{b}{n}
+\newcommand{\Jscr}{\mathscr{J}}
+\newcommand{\Jscrb}{\mathscr{J}}
+
+\newenvironment{bluenv}[1]
+{\begin{mdframed}[style=blue, frametitle=#1]}
+{\end{mdframed}}
+
+% monospace 
+\def\code#1{\texttt{#1}}
+
+\makeatother
+
+\renewcommand{\d}{\ensuremath{\textrm{d}}}
+
+% UNCOMMENT BELOW FOR PROBLEM SOLUTION ENVIRONMENTS
+\newmdenv[topline=false, rightline=false, bottomline=false, leftline=false,
+innertopmargin=5pt, innerleftmargin=0pt,innerrightmargin=0pt, innerbottommargin=10pt,
+backgroundcolor=white,frametitle=Solution,frametitlefont=\normalfont\itshape]{solution}
+
+\newmdenv[style=blue,backgroundcolor=lblue!20!white]{problem}
+
+\renewcommand{\theenumi}{\alph{enumi}}
+\renewcommand{\labelenumi}{(\theenumi)}
+\renewcommand{\theenumii}{\roman{enumii}}
+\renewcommand{\labelenumii}{(\theenumii)}
+
+\newcommand{\pvec}{\bm{p}}
+
+
+%====
+% MACROS
+%====
+
+% Equations
+\newcommand{\eref}[1]{eq.~(\ref{#1})}
+\newcommand{\Eref}[1]{Eq.~(\ref{#1})}
+
+% Sections
+\newcommand{\sref}[1]{sec.~(\ref{#1})}
+\newcommand{\Sref}[1]{Sec.~(\ref{#1})}
+
+% Figures
+\newcommand{\fref}[1]{fig.~(\ref{#1})}
+\newcommand{\Fref}[1]{Fig.~(\ref{#1})}

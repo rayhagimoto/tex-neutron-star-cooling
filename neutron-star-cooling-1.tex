@@ -1,0 +1,96 @@
+%===
+% SECTION: Introduction
+%===
+\section{Introduction}\label{sec:introduction}
+The goal of this project is to evaluate the integral 
+
+%---
+% emissivity integral
+%---
+\begin{bluenv}{}
+    \begin{equation}
+    \label{eq:emissivity-integral}
+    \begin{aligned}
+        \dd \varepsilon_{3'} = 
+            f_1 f_2 (1 - f_{1'}) (1 - f_{2'}) (1 + f_{3'})
+            \, E_{3'} \,
+            \sum_{\sigma, \sigma'} | \mathcal{M} |^2 \,
+            \dd \Phi_n(1, 2; 1', 2', 3') \; 
+    \end{aligned}
+    \end{equation}
+\end{bluenv}
+where, 
+\begin{equation*}
+    \dd \Phi_n(a, b; 1, \ldots, n) \equiv 
+    \prod_{i=1}^{n}
+    \bigg[
+         \delta (p_i^2 - m_i^2) \, \Theta(p_i^0) \, 
+        \frac{\dd^4 p_i}{(2\pi)^3}
+    \bigg] \, (2\pi)^4 \delta^4(p_a + p_b - p_1 - \cdots - p_n) \quad 
+\end{equation*}
+is the Lorentz-invariant phase space measure, and
+\begin{equation*}
+    f_i \equiv f_{FD}(E_i) \equiv \frac{1}{e^{(E_i - \mu_i)/T} + 1}
+\end{equation*}
+is the Fermi-Dirac distribution. 
+The spin-summed matrix element squared is given by
+\begin{equation}
+    \label{eq:matrix-element}
+    \sum_{\sigma, \sigma'} | \mathcal{M} |^2 
+        = 
+        \frac{128 \, g^2_{ae\mu} e^4}{(m_1^2 - m_{1'}^2)^2} \,
+        \frac{
+             (p_1 \cdot p_{1'} - m_1 m_{1'})
+            (p_2 \cdot p_{3'})
+            (p_{2'} \cdot p_{3'})
+        }
+        {
+            (p_2 - p_{2'})^4
+        } \; \, .
+\end{equation}
+We can use the momentum conserving Dirac delta to evaluate the $\bm{p}_{2'}$ integral, setting
+\begin{align}
+    \bm{p}_{2'} = \bm{p}_{1} + \bm{p}_{2} - \bm{p}_{1'} - \bm{p}_{3'}.
+\end{align}
+We now choose to align the $z$-axis with $\bm{p}_1$ and measure angles with respect to this axis. 
+Converting to spherical polar coordinates gives, for example, $\dd^3 p_{3'} = p_{3'}^2 \, \dd p_{3'} \, \dd \cos \theta_{13'} \, \dd \phi_{13'}$
+\footnote{The angle $\phi_{13'}$ is not measured with respect to $\bm{p}_1$, it is measured to some axis orthogonal to $\bm{p}_1$. We don't need to define that axis explicitly as long as the other angles $\phi_{1i}$ are measured with respect to the same axis.}
+. 
+Then the energy conserving Dirac delta can be used to evaluate the $\dd p_{3'}$ integral in the following way. 
+First, we use $E = \sqrt{p^2 + m^2}$ to rewrite the masses. 
+Then we use momentum conservation to make the replacement $\bm{p}_{2'} \rightarrow \bm{p}_{1} + \bm{p}_{2} - \bm{p}_{1'} - \bm{p}_{3'}$:
+\begin{align*}
+    &E_1 + E_2 
+    = E_{1'} + E_{2'} + E_{3'}\\
+    &\Rightarrow \sqrt{p_1^2 + m_1^2} + \sqrt{p_{2}^2 + m_2^2} =
+        \sqrt{p_{1'}^2 + m_{1'}^2} + 
+        \sqrt{p_{2'}^2 + m_{2'}^2} + 
+        \sqrt{p_{3'}^2 + m_{3'}^2}\\
+    &\Rightarrow \sqrt{p_1^2 + m_1^2} + \sqrt{p_{2}^2 + m_2^2} =
+        \sqrt{p_{1'}^2 + m_{1'}^2} + 
+        \sqrt{(\bm{p}_{1} + \bm{p}_{2} - \bm{p}_{1'} - \bm{p}_{3'})^2 + m_{2'}^2} + 
+        \sqrt{p_{3'}^2 + m_{3'}^2}. \numberthis{} \label{eq:p3p-equation-1}
+\end{align*} 
+We would like to solve eqn. (\ref{eq:p3p-equation-1}) for $p_{3'}$, but there is a problem coming from the fact that $p_{3'}$ appears under two square root symbols which makes it impossible to get an expression of the form $p_{3'} = \cdots$. 
+Instead, we will make the approximation that because $p_{3'} \ll p_{i}$ for $i \in \{1, 2, 1', 2'\}$ that we can ignore the $p_{3'}$ that shows up in $\sqrt{(\bm{p}_{1} + \bm{p}_{2} - \bm{p}_{1'} - \bm{p}_{3'})^2 + m_{2'}^2}$~. 
+The result we obtain when solving for $p_{3'}$ is then
+\begin{equation}
+\begin{aligned}
+    p_{3'} = 
+        \bigg[
+            &m_1^2 + m_{1'}^2 + m_2^2 + m_{2'}^2 - m_{3'}^2 + 2 p_{1}^2 - 2 p_{1} p_{1'} c_{11'} + 2 p_{1'}^2 - 2 E_1 E_{1'} \\
+            &+ 2 p_1 p_2 c_{12} - 2 p_{2} p_{1'} c_{21'} + 2 p_2^2 + 2 E_1 - 2 E_{1'} E_2 \\
+            &- 2 E_1 E_{2'}(p_1, p_{2}, p_{1'}, c_{11'}, c_{12}, c_{21'})
+            + 2 E_{1'} E_{2'}(p_1, p_{2}, p_{1'}, c_{11'}, c_{12}, c_{21'})\\
+            &- 2 E_2 E_{2'}(p_1, p_{2}, p_{1'}, c_{11'}, c_{12}, c_{21'})
+        \bigg]^{1/2}
+\end{aligned}
+\end{equation}
+where $E_i \equiv \sqrt{p_i^2 + m_i^2}$, $c_{ij} \equiv \cos \theta_{ij} \equiv \bm{p}_i \cdot \bm{p}_j / (p_i p_j)$ and 
+\begin{align}
+    E_{2'}(p_1, p_{2}, p_{1'}, c_{11'}, c_{12}, c_{21'}) = \sqrt{p_1^2  - 2 p_1 p_{1'} c_{11'} + p_{1'}^2  + 2 p_{1} p_{2} c_{12} - 2 p_2 p_{1'} c_{21'} + p_2^2 + m_{2'}^2}.    
+\end{align}
+Now that we have an expression for $p_{3'}$ the requirement that $p_{3'}$ must be real and non-negative restricts the domain of integration of the other variables. 
+\hl{I am not sure how to derive the new limits so I got stuck here.}
+
+

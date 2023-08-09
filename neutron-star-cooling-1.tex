@@ -25,18 +25,20 @@ The goal of this project is to evaluate the integral
     \end{equation}
 \end{bluenv}
 where, 
-\begin{equation}
-    \label{eq:LIPS}
-    \dd \Phi_n \big((p_a + p_b)^2; 1, \ldots, n \big) \equiv 
-    \prod_{i=1}^{n}
-    \bigg[
-         \delta (p_i^2 - m_i^2) \, \Theta(p_i^0) \, 
-        \frac{\dd^4 p_i}{(2\pi)^3}
-    \bigg] \, (2\pi)^4 \delta^4 
-    \bigg( 
-        p_a + p_b - \sum_{i=1}^{n} p_i
-    \bigg) \quad 
-\end{equation}
+\begin{bluenv}{Lorentz invariant phase space measure}
+    \begin{equation}
+        \label{eq:LIPS}
+        \dd \Phi_n \big((p_a + p_b)^2; 1, \ldots, n \big) \equiv 
+        \prod_{i=1}^{n}
+        \bigg[
+             \delta (p_i^2 - m_i^2) \, \Theta(p_i^0) \, 
+            \frac{\dd^4 p_i}{(2\pi)^3}
+        \bigg] \, (2\pi)^4 \delta^4 
+        \bigg( 
+            p_a + p_b - \sum_{i=1}^{n} p_i
+        \bigg) \quad 
+    \end{equation}
+\end{bluenv}
 is the Lorentz-invariant phase space measure, and
 \begin{equation*}
     f_i \equiv f_{FD}(E_i) \equiv \frac{1}{e^{(E_i - \mu_i)/T} + 1}

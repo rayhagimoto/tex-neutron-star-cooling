@@ -72,12 +72,13 @@ The important case for me is when $n = 3$:
     \begin{equation}
         \label{eq:recursive-LIPS-3}
     \begin{aligned}
-        R_3(s) = (2\pi)^{5}\int \dd \Phi_3(s) = 
+        R_3(s) &= (2\pi)^{5}\int \dd \Phi_3(s) \\
+            &= 
             \int_{(m_1 + m_2)^2}^{(\sqrt{s} - m_3)^2} \dd M_{2}^2 
             \int \dd \Omega_3 \,
-            \frac{\lambda (s, M^2_{2}, m_3^2)}{8s} \,
+            \frac{\sqrt{\lambda (s, M^2_{2}, m_3^2)}}{8s} \,
             \int \dd \Omega_2 \,
-            \frac{\lambda (M^2_2, m_1^2, m_2^2)}{8 M_2^2} \; .
+            \frac{\sqrt{\lambda (M^2_2, m_1^2, m_2^2)}}{8 M_2^2} \; .
     \end{aligned}
     \end{equation}
 \end{bluenv}
@@ -195,14 +196,44 @@ Introducing these variables in \eref{eq:recursion-momentum-transfer} the authors
 \end{equation}
 where
 \begin{align}
-    K(s_n, t_n, s_{n-1}, t_{n-1}) &\\
+    K&(s_n, t_n, s_{n-1}, t_{n-1}) \\
     & = \int \dd^4 Q_{n-1} \delta(Q^2_{n-1} - t_{n-1}) \, \delta(s_{n-1} - (p_a - Q_{n-1})^2) \, \delta ( (Q_{n-1} - Q_n)^2 - m_n^2) \\
     & = \int_0^{2\pi} \dd \varphi_{n-1} 
         \frac{1}{4 \sqrt{\lambda(s_n, t_n, m_a^2)}} \, 
-        \theta(- G(t_{n-1}, s_n, s_{n-1}, t_n, m_n^2, m_a^2)).
+        \Theta(- G(t_{n-1}, s_n, s_{n-1}, t_n, m_n^2, m_a^2)) \; ,
 \end{align}
-$\varphi_{n-1}$ defines the azimuthal angle of $\bm{Q}_{n-1}$ in the frame $p_a = (m_a, \bm{0})$.
+$\Theta(x)$ is the Heaviside step-function, and
+$\varphi_{n-1}$ defines the azimuthal angle of $\bm{Q}_{n-1}$ in the frame $p_a = (m_a, \bm{0})$. $G$ is a kinematic function defined by
+\begin{equation}
+    \begin{aligned}
+        \label{eq:G-defn}
+        G(x,y,z,u,v,w) & = -\frac{1}{2}
+        \begin{vmatrix}
+            2 u & x + u - v & u + w - y \\
+             & 2x & x - z + w \\
+            \text{(symm.)} &  & 2w
+        \end{vmatrix} \\
+        & = x^2 y + xy^2 + z^2 u + v w^2 + v^2 w \\
+        & \phantom{=} + xzw + xuv + yzv + yuw \\
+        & \phantom{=} - xy(z + u + v + w) - zu (x + y + v + w) - vw(x + y + z + u) \; .
+    \end{aligned}
+\end{equation}
 
+\begin{bluenv}{$R_n$ for $n = 3$}
+    \vspace{-3ex}
+    \begin{align}
+        R_3(s_3, t_3) 
+            = \frac{1}{4\sqrt{\lambda(s_3, t_3, m_a^2)}}
+              \int \frac{\dd s_2 \dd t_2 \dd \varphi_2}
+                        {4 \sqrt{\lambda(s_2, t_2, m_a^2)}}
+              \Theta(- G_2) 
+              \int \dd t_1 \dd \varphi_1 \Theta(- G_1)
+    \end{align}
+    with 
+    \begin{gather}
+        G_i = G(t_i, s_{i+1}, s_i, t_{i+1}, m_{i+1}^2, m_a^2) \; .
+    \end{gather}
+\end{bluenv}
 
 
 \footnotetext{$M_1^2 = m_1^2$,  $M_3^2 = s$ and  $t_3 = (-p_b)^2 = m_b^2$ are all constants, not integration variables.}  

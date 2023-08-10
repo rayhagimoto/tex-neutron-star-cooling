@@ -35,8 +35,8 @@ One important result is that this strategy always converges as $N^{-1/2}$ in all
 %===
 % SUBSEC: Importance sampling
 %===
-\vspace{7px}
-\subsection{Importance sampling}\label{subsec:mc-importance-sampling}
+\subsec{Importance sampling}
+\label{subsec:mc-importance-sampling}
 In sec. \ref{subsec:mc-basics} we sampled $x$ uniformly at random on the domain of integration. However, we can choose to sample $x$ from any arbitrary distribution $p(x)$ and compute the same expectation value by weighting the sample $f(x)$ by $1 / p(x)$ so that
 \begin{align}
     I \approx \frac{V}{N}\sum_{i=1}^{N} \frac{f(x_i)}{p(x_i)}.
@@ -55,3 +55,10 @@ The discussion of the VEGAS algorithm at \url{https://www.ippp.dur.ac.uk/~krauss
     ``The VEGAS algorithm starts by dividing the $n$-dimensional hypercube $[0,1]^n$ into smaller ones -- usually of identical size -- and performs a sampling in each of them. 
     The results are then used to refine the integration grid for the next iteration of the sampling procedure.''
 \end{quotation}
+ 
+\subsec{Stratified sampling}
+\label{subsec:stratified-sampling}
+
+\subsec{Multichannel sampling}
+\label{subsec:multichannel-sampling}
+

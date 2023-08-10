@@ -19,9 +19,10 @@ Consider the phase space integral $R_n(p_a + p_b)$ defined by
         \int \cdots \int \prod_{i=1}^{n} \delta (p_i^2 - m_i^2) \, \Theta(p_i^0) \, 
         \dd^4 p_i \, \delta^4(p_a + p_b - p_1 - \cdots - p_n).
     \end{equation}
+    where $p_i$ now denotes a four-momentum vector in constrast to the previous section where it represented a three-momentum magnitude.
+    This is manifestly Lorentz invariant and therefore $R_n$ may only be a function of $s \equiv (p_a + p_b)^2$. 
 \end{bluenv}
-where $p_i$ now denotes a four-momentum vector in constrast to the previous section where it represented a three-momentum magnitude.
-This is manifestly Lorentz invariant and therefore $R_n$ may only be a function of \hl{$s \equiv (p_a + p_b)^2$}. 
+
 
 We note that $R_n(s)$ is related to $\dd \Phi_n(s)$ by
 \begin{equation}
@@ -65,7 +66,7 @@ Repeated application of \eref{eq:recursive-phase-space-relation} yields
     \frac{\sqrt{\lambda(M_{2}^2, m_1^2, m_{2}^2)}}{8M_{2}^2}. 
 \end{aligned}
 \end{equation}
-
+\newpage
 The important case for me is when $n = 3$:
 \begin{bluenv}{Phase space measure for $n = 3$}
     \vspace{-3ex}
@@ -106,7 +107,7 @@ This case seems to be similar to the one considered in~\cite{Isaacson:2021xty} (
 In sec~\ref{subsec:recursive-relation} we wrote the phase space integral in terms of invariant masses and angles of the three-momenta $\bm{p}_i$ defined in the center-of-mass frame where $\sum_{k=1}^{i} p_k = (M_{i}, \bm{0})$. 
 The matrix element in \eref{eq:matrix-element} is a function of the Lorentz invariants $(p_a \cdot p_1), \; (p_b \cdot p_3), \; (p_2 \cdot p_3)$, and $(p_b \cdot p_2) = (- (p_a - p_1 - p_2 - p_3) \cdot p_2)$. 
 It is cumbersome to write this matrix element explicitly in terms of the angles $\{ (\theta_i, \varphi_i) : i = 1, 2, \ldots, n\}$ so we would rather use kinematic Lorentz invariants analogous to the Mandelstam variables for $2 \rightarrow 2$ scattering\footnotemark.
-To this end it is convenient to introduce the so-called `momentum transfers' $t_i \equiv Q_i^2 \equiv (p_a - p_1 - \cdots - p_i)^2 = (p_n + p_{n-1} + \cdots + p_{i + 1} - p_b)^2$.
+To this end it is convenient to \hl{introduce the so-called `momentum transfers' $t_i \equiv Q_i^2 \equiv (p_a - p_1 - \cdots - p_i)^2 = (p_n + p_{n-1} + \cdots + p_{i + 1} - p_b)^2$}.
 
 \footnotetext{At least, I think that is the motivation for introducing these variables.}
 
@@ -114,30 +115,24 @@ Some of the dot products (but not all) may be written exclusively in terms of th
 \begin{gather*}
     \begin{align*}
         t_1 &\equiv (p_a - p_1)^2 &&\rightarrow 
-        && 2 p_a \cdot p_1 = m_a^2 +  m_1^2 - t_1 \\
+            && 2 p_a \cdot p_1 = m_a^2 +  m_1^2 - t_1 \\
         t_2 &\equiv (p_a - (p_1 + p_2))^2 &&\rightarrow 
-        && 2 p_a \cdot p_2 = M_2^2 - m_1^2 + t_1 - t_2 \\
+            && 2 p_a \cdot p_2 = M_2^2 - m_1^2 + t_1 - t_2 \\
         t_3 &\equiv (p_a - (p_1 + p_2 + p_3))^2 &&\rightarrow 
-        && 2 p_a \cdot p_3 = M_3^2 - M_2^2 + t_2 \\
+            && 2 p_a \cdot p_3 = t_2 - t_3 - M_2^2 + M_3^2 \\
         M_2^2 &\equiv (p_1 + p_2)^2 &&\rightarrow 
-        && 2 p_1 \cdot p_2 = M_2^2 - m_1^2 - m_2^2 \\
+            && 2 p_1 \cdot p_2 = M_2^2 - m_1^2 - m_2^2 \\
         M_3^2 &\equiv (p_1 + p_2 + p_3)^2 &&\rightarrow 
-        && 2 (p_1 + p_2) \cdot p_3 = M_3^2 - 2 M_2^2 + m_1^2 + m_2^2 - m_3^2 
-    \end{align*}\\
-    2 p_b \cdot p_3 = 2 (p_1 + p_2) \cdot p_3 + 2 m_3^2  - 2 p_a \cdot p_3 =
-    m_1^2 + m_2^2 + m_3^2 - M_2^2 - t_2
+            && 2 (p_1 + p_2) \cdot p_3 = M_3^2 - M_2^2 - m_3^2 \\
+        p_b &= p_1 + p_2 + p_3 - p_a &&\rightarrow
+            && 2p_b \cdot p_3 = m_3^2 + t_3 - t_2 \\
+        & && && 2p_b \cdot p_2 = 2 p_2 \cdot p_3 + m_2^2 + t_2 - t_1
+    \end{align*}
 \end{gather*}
 However I was unable to write $p_2 \cdot p_3$ in terms of the invariants alone. 
 $p_b \cdot p_2$ is really just $p_2 \cdot p_3$ in disguise so it has the same problem.
-I believe this is because these variables are not enough to fully describe the system and some angles are required in addition. 
-We need $3(3) - 4 = 5$ integration variables but only $3$ of them are prescribed by the kinematic invariants $M_2^2$, $t_1$, and $t_2$\footnotemark.
-I haven't followed their derivation through in enough detail to understand precisely how they show up in the expression\todo{
-    Understand how to write the matrix element explicitly in terms of the angles $\varphi_1$, $\varphi_2$ as well as the invariants $M_2^2$, $t_1$, and $t_2$.
-}.
-The two additional degrees of freedom can be seen in eq. (14) of~\cite{Byckling:1969sx}. 
-They are the azimuthal angles $\varphi_1$, $\varphi_2$ as seen in a frame where $p_a = (m_a, \bm{0})$.   
-
-
+This is because we need $3(3) - 4 = 5$ integration variables. Right now we only have $t_1,\ t_2,\ M_2^2$ which is not enough to fully describe the system; two more are required. 
+The additional degrees of freedom are given by the azimuthal angles of the $\bm{Q}_i$ vectors $\varphi_1$, $\varphi_2$ as seen in a frame where $p_a = (m_a, \bm{0})$ (cf. \eref{eq:recursive-momentum-transfer-k} which is eq. (14) of~\cite{Byckling:1969sx}.)
 
 To transform $R_n$ into a form in which the momentum transfers appear as variables we must consider the phase space integral as a function of $p_a$ and $-p_b \equiv Q_n$ separately: $R_n = R_n(p_a, Q_n)$. 
 Let $Q_i = p_a - p_1 - \cdots - p_i$ so that $p_i = Q_{i-1} - Q_i$. 
@@ -191,17 +186,21 @@ The recursion relation is then simply
 $R_n$ is now regarded as a function of two invariants $s = s_n = (p_a - Q_n)^2$, and $t_n = Q_n^2$: $R_n = R_n(p_a, Q_n) = R_n(s_n, t_n)$. 
 Introducing these variables in \eref{eq:recursion-momentum-transfer} the authors of~\cite{Byckling:1969sx} obtain
 \begin{equation}
+    \label{eq:recursive-momentum-transfer-s-n}
     R_n(s_n, t_n, s_{n-1}, t_{n-1}) = \int \dd s_{n-1} \, \dd t_{n-1} \, 
         K(s_n, t_n, s_{n-1}, t_{n-1}) \, R_{n-1}(s_{n-1}, t_{n-1}) \, ,
 \end{equation}
 where
-\begin{align}
-    K&(s_n, t_n, s_{n-1}, t_{n-1}) \\
-    & = \int \dd^4 Q_{n-1} \delta(Q^2_{n-1} - t_{n-1}) \, \delta(s_{n-1} - (p_a - Q_{n-1})^2) \, \delta ( (Q_{n-1} - Q_n)^2 - m_n^2) \\
-    & = \int_0^{2\pi} \dd \varphi_{n-1} 
-        \frac{1}{4 \sqrt{\lambda(s_n, t_n, m_a^2)}} \, 
-        \Theta(- G(t_{n-1}, s_n, s_{n-1}, t_n, m_n^2, m_a^2)) \; ,
-\end{align}
+\begin{equation}
+    \label{eq:recursive-momentum-transfer-k}
+    \begin{aligned}
+        K&(s_n, t_n, s_{n-1}, t_{n-1}) \\
+        & = \int \dd^4 Q_{n-1} \delta(Q^2_{n-1} - t_{n-1}) \, \delta(s_{n-1} - (p_a - Q_{n-1})^2) \, \delta ( (Q_{n-1} - Q_n)^2 - m_n^2) \\
+        & = \int_0^{2\pi} \dd \varphi_{n-1} 
+            \frac{1}{4 \sqrt{\lambda(s_n, t_n, m_a^2)}} \, 
+            \Theta(- G(t_{n-1}, s_n, s_{n-1}, t_n, m_n^2, m_a^2)) \; ,
+    \end{aligned}
+\end{equation}
 $\Theta(x)$ is the Heaviside step-function, and
 $\varphi_{n-1}$ defines the azimuthal angle of $\bm{Q}_{n-1}$ in the frame $p_a = (m_a, \bm{0})$. $G$ is a kinematic function defined by
 \begin{equation}

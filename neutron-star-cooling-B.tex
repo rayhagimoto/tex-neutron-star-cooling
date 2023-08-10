@@ -1,0 +1,86 @@
+%====
+% Appendix B: 2 p2.p3
+%====
+\section{Evaluating $2 p_2 \cdot p_3$}
+\newcommand{\Qvec}[1]{\bm{Q}_{#1}}
+\newcommand{\Qmag}[1]{|\bm{Q}_{#1}|}
+\label{app:2-dot-3}
+Let $\varepsilon_i = Q_i^0 = \sqrt{\Qmag{i}^2 + t_i}$. Then,
+\begin{equation}
+    \begin{aligned}
+        p_2 \cdot p_3 
+        &=
+            (Q_1 - Q_2)\cdot(Q_2 - Q_3)     \\
+        &=
+            Q_1 \cdot Q_2 - Q_1 \cdot Q_3 - t_2 + Q_2 \cdot Q_3 \\
+        &= 
+            \varepsilon_1 \varepsilon_2 - \Qvec{1}\cdot\Qvec{2}
+        -
+            \varepsilon_1 \varepsilon_3 - \Qvec{1}\cdot\Qvec{3}
+        -
+            t_2
+        +
+        \varepsilon_2 \varepsilon_3 - \Qvec{2}\cdot\Qvec{3} \, . 
+    \end{aligned}
+\end{equation}
+To simplify things we choose to measure angles relative to $\Qvec{3} = -\bm{p}_b$. Therefore, 
+\begin{align}
+    \Qvec{1} &= \cos \varphi_1 \sin \theta_1 \hat{\bm{i}} + \sin \varphi_1 \sin \theta_1 \hat{\bm{j}} + \cos \theta_1 \hat{\bm{k}} \\
+    \Qvec{2} &= \cos \varphi_2 \sin \theta_2 \hat{\bm{i}} + \sin \varphi_2 \sin \theta_2 \hat{\bm{j}} + \cos \theta_2 \hat{\bm{k}} \\
+    \Qvec{3} &= \hat{\bm{k}} \; .
+\end{align}
+Thus,
+\begin{align}
+    p_2 \cdot p_3 
+    =\  
+        &\varepsilon_1 \varepsilon_2 - \Qmag{1}\Qmag{2} 
+        \big[
+            \sin \theta_1 \sin \theta_2 \cos(\varphi_1 - \varphi_2) + \cos\theta_1 \cos\theta_2
+        \big]\\
+    &-
+        \varepsilon_1 \varepsilon_3 - \Qmag{1}\Qmag{3} \cos \theta_1
+    -
+        t_2
+    +
+    \varepsilon_2 \varepsilon_3 - \Qmag{2}\Qmag{3} \cos \theta_2 \; .
+\end{align}
+But, 
+\begin{gather}
+    \begin{aligned}
+        \Qmag{i} &= \frac{\sqrt{\lambda(s_i, t_i, m_a^2)}}{2 m_a} \\
+        \varepsilon_i &= \frac{t_i - s_i - m_a^2}{2 m_a} \\
+        \cos \theta_i & = 
+            \frac
+                {
+                    (t_i - s_i - m_a^2)(t_{i+1} - s_{i+1} - m_a^2) - 2m_a^2(t_i + t_{i+1} - m_n^2)
+                }
+                {
+                    \sqrt{
+                        \lambda(s_i, t_i, m_a^2) \lambda(s_{i+1},t_{i+1}, m_a^2)
+                    }
+                } \\
+        \sin \theta^2_i & = 
+                -
+                \frac
+                    {
+                        m_a^2
+                    }
+                    {
+                        \lambda(s_{i+1}, t_{i+1}, m_a^2) \lambda(s_i, t_i, m_a^2)
+                    } \, 
+                G(t_i, s_{i+1}, t_i, t_{i+1}, m_{i+1}^2, m_a^2) 
+    \end{aligned}
+\end{gather}
+so 
+\begin{align}
+    \Qmag{2}\Qmag{3} \cos \theta_2 &= 
+        \frac{1}{4m_a^2}
+        \big[
+            (t_2 - s_2 - m_a^2)(t_{3} - s_{3} - m_a^2) - 2m_a^2(t_2 + t_{3} - m_3^2)
+        \big] \\
+    \Qmag{1}\Qmag{3} \cos \theta_2 &= 
+        \frac{1}{4m_a^2}
+        \big[
+            (t_2 - s_2 - m_a^2)(t_{3} - s_{3} - m_a^2) - 2m_a^2(t_2 + t_{3} - m_3^2)
+        \big] \\
+\end{align}

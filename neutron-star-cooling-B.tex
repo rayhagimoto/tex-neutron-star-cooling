@@ -1,6 +1,14 @@
 %====
 % Appendix B: 2 p2.p3
 %====
+% Macros for App. B:
+\newcommand*{\sintheta}[2]{
+    \sqrt{\frac{m_a^2 (-G_{#1})}{\lambda_{#1} \lambda_{#2}}}
+}
+\newcommand*{\costheta}[2]{
+    \frac{\sqrt{\Lambda_{#1} \Lambda_{#2}} - 2 m_a^2 (t_{#1} + t_{#2} - m_{#2}^2)}{\sqrt{\lambda_{#1}\lambda_{#2}}}
+}
+
 \section{Evaluating $2 p_2 \cdot p_3$}
 \newcommand{\Qvec}[1]{\bm{Q}_{#1}}
 \newcommand{\Qmag}[1]{|\bm{Q}_{#1}|}
@@ -23,64 +31,137 @@ Let $\varepsilon_i = Q_i^0 = \sqrt{\Qmag{i}^2 + t_i}$. Then,
         \varepsilon_2 \varepsilon_3 - \Qvec{2}\cdot\Qvec{3} \, . 
     \end{aligned}
 \end{equation}
-To simplify things we choose to measure angles relative to $\Qvec{3} = -\bm{p}_b$. Therefore, 
+To simplify things we choose to measure angles relative to $\Qvec{3} = -\bm{p}_b$. This frame is compatible with the discussion in the main text because there we chose to measure angles in a frame where $p_a = (m_a, \bm{0})$, so we have not assumed $\pvec[b] = 0$. Therefore, 
 \begin{align}
     \Qvec{1} &= \cos \varphi_1 \sin \theta_1 \hat{\bm{i}} + \sin \varphi_1 \sin \theta_1 \hat{\bm{j}} + \cos \theta_1 \hat{\bm{k}} \\
     \Qvec{2} &= \cos \varphi_2 \sin \theta_2 \hat{\bm{i}} + \sin \varphi_2 \sin \theta_2 \hat{\bm{j}} + \cos \theta_2 \hat{\bm{k}} \\
     \Qvec{3} &= \hat{\bm{k}} \; .
 \end{align}
-Thus,
+Moreover, 
 \begin{align}
-    p_2 \cdot p_3 
-    =\  
-        &\varepsilon_1 \varepsilon_2 - \Qmag{1}\Qmag{2} 
-        \big[
-            \sin \theta_1 \sin \theta_2 \cos(\varphi_1 - \varphi_2) + \cos\theta_1 \cos\theta_2
-        \big]\\
-    &-
-        \varepsilon_1 \varepsilon_3 - \Qmag{1}\Qmag{3} \cos \theta_1
-    -
-        t_2
-    +
-    \varepsilon_2 \varepsilon_3 - \Qmag{2}\Qmag{3} \cos \theta_2 \; .
+    \Qmag{i} &= \frac{\sqrt{\lambda_i}}{2 m_a} \\
+    \varepsilon_i &= \frac{\sqrt{\Lambda_i}}{2 m_a} \\
+    \cos \theta_i &= \frac{\sqrt{\Lambda_i \Lambda_{i+1}} - 2 m_a^2 (t_i + t_{i+1} - m_{i+1}^2)}{\sqrt{\lambda_i \lambda_{i+1}}} \\
+    \sin\theta_i &= \sintheta{i}{i+1}
 \end{align}
-But, 
+where
+\begin{align}
+    \lambda_i &\equiv \lambda(s_i, t_i, m_a^2) \\
+    \Lambda_i &\equiv \lambda_i + 4 m_a^2 t_i = (s_i - t_i - m_a^2)^2 \\
+    G_i &\equiv G(t_i, s_{i+1}, s_i, t_{i+1}, m_{i+1}^2, m_a^2) . 
+\end{align}
+Now we can use these identities to evaluate the dot products $Q_2 \cdot Q_3$, $Q_1 \cdot Q_3$, and $Q_1 \cdot Q_2$:
+% Q2 dot Q3
 \begin{gather}
     \begin{aligned}
-        \Qmag{i} &= \frac{\sqrt{\lambda(s_i, t_i, m_a^2)}}{2 m_a} \\
-        \varepsilon_i &= \frac{t_i - s_i - m_a^2}{2 m_a} \\
-        \cos \theta_i & = 
-            \frac
-                {
-                    (t_i - s_i - m_a^2)(t_{i+1} - s_{i+1} - m_a^2) - 2m_a^2(t_i + t_{i+1} - m_n^2)
-                }
-                {
-                    \sqrt{
-                        \lambda(s_i, t_i, m_a^2) \lambda(s_{i+1},t_{i+1}, m_a^2)
-                    }
-                } \\
-        \sin \theta^2_i & = 
-                -
-                \frac
-                    {
-                        m_a^2
-                    }
-                    {
-                        \lambda(s_{i+1}, t_{i+1}, m_a^2) \lambda(s_i, t_i, m_a^2)
-                    } \, 
-                G(t_i, s_{i+1}, t_i, t_{i+1}, m_{i+1}^2, m_a^2) 
+        Q_2 \cdot Q_3 
+        &= 
+        \frac{\sqrt{\Lambda_2 \Lambda_3}}{4 m_a^2} 
+        - \frac{\sqrt{\lambda_2 \lambda_3}}{4 m_a^2} 
+        \frac{\sqrt{\Lambda_2 \Lambda_3} - 2m_a^2(t_2 + t_3 - m_3^2)}{\sqrt{\lambda_2 \lambda_3}} \\
+        &= \frac{1}{2}(t_2 + t_3 - m_3^2) \ . 
     \end{aligned}
 \end{gather}
-so 
-\begin{align}
-    \Qmag{2}\Qmag{3} \cos \theta_2 &= 
-        \frac{1}{4m_a^2}
-        \big[
-            (t_2 - s_2 - m_a^2)(t_{3} - s_{3} - m_a^2) - 2m_a^2(t_2 + t_{3} - m_3^2)
-        \big] \\
-    \Qmag{1}\Qmag{3} \cos \theta_2 &= 
-        \frac{1}{4m_a^2}
-        \big[
-            (t_2 - s_2 - m_a^2)(t_{3} - s_{3} - m_a^2) - 2m_a^2(t_2 + t_{3} - m_3^2)
-        \big] \\
-\end{align}
+% Q1 dot Q3
+\begin{gather}
+    \begin{aligned}
+        Q_1 \cdot Q_3 
+        &= 
+        \frac{\sqrt{\Lambda_1 \Lambda_3}}{4 m_a^2} 
+            - \frac{\sqrt{\lambda_1 \lambda_3}}{4 m_a^2} 
+            \frac{\sqrt{\Lambda_1 \Lambda_2} - 2m_a^2(t_1 + t_2 - m_2^2)}{\sqrt{\lambda_1 \lambda_2}} \\
+            &= 
+            \frac{1}{4 m_a^2}
+            \bigg \{
+                \sqrt{\Lambda_1 \Lambda_3} - \sqrt{\frac{\lambda_3}{\lambda_2}} 
+                \big[
+                    \sqrt{\Lambda_1 \Lambda_2} - 2 m_a^2(t_1 + t_2 - m_2^2)
+                \big]
+            \bigg \}
+    \end{aligned}
+\end{gather}
+% Q1 dot Q2
+\begin{gather}
+    \begin{aligned}
+        Q_1 \cdot Q_2 
+            &= 
+            \varepsilon_1 \varepsilon_2
+                - \Qmag{1} \Qmag{2} 
+                \bigl(
+                    \sin \theta_1 \sin \theta_2 \cos(\varphi_1 - \varphi_2) + \cos \theta_1 \cos \theta_2
+                \bigr) \\
+            &=
+            \frac{\sqrt{\Lambda_1 \Lambda_2}}{4 m_a^2}
+            - \frac{\sqrt{\lambda_1 \lambda_2}}{4 m_a^2}
+            \bigg[
+                \sintheta{1}{2}
+                \sintheta{2}{3}
+                \cos(\varphi_1 - \varphi_2)
+                + \cos\theta_1 \cos\theta_2
+            \bigg] \\
+            &=
+            \frac{\sqrt{\Lambda_1 \Lambda_2}}{4 m_a^2}
+            - \frac{\sqrt{\lambda_1 \lambda_2}}{4 m_a^2}
+            \bigg[
+                \sintheta{1}{2}
+                \sintheta{2}{3}
+                \cos(\varphi_1 - \varphi_2) \\
+                & \hphantom{=\quad} + \costheta{1}{2} \costheta{2}{3}
+            \bigg] \\
+            &=
+            \frac{\sqrt{\Lambda_1 \Lambda_2}}{4 m_a^2}
+            - \frac{1}{4 m_a^2}
+            \bigg[
+                m_a^2 \sqrt{\frac{(G_1)(G_2)}{\lambda_2 \lambda_3}}
+                \cos(\varphi_1 - \varphi_2) \\
+                & \hphantom{=\quad} +
+                (\sqrt{\Lambda_1 \Lambda_2} - 2 m_a^2 (t_1 + t_2 - m_2^2)) 
+                \costheta{2}{3}
+            \bigg] \\
+            &= 
+            \frac{1}{4 m_a^2}
+            \bigg \{
+                \sqrt{\Lambda_1 \Lambda_2}
+                - 
+                \frac{1}{\sqrt{\lambda_2 \lambda_3}}
+                \bigg[
+                    m_a^2 \sqrt{G_1 G_2} \cos (\varphi_1 - \varphi_2) \\
+                    &\hphantom{= \quad} 
+                    + 
+                    \big(\sqrt{\Lambda_1 \Lambda_2} - 2 (t_1 + t_2 - m_2^2)\big)
+                    \big(\sqrt{\Lambda_2 \Lambda_3} - 2 (t_2 + t_3 - m_3^2)\big)
+                \bigg]
+            \bigg \}
+    \end{aligned}
+\end{gather}
+\begin{bluenv}{Main result of this appendix}
+    \begin{gather}
+        \begin{aligned}
+            p_2 \cdot p_3 &= 
+            \frac{1}{4 m_a^2} 
+            \bigg\{
+            % Q1 dot Q2
+            \sqrt{\Lambda_1 \Lambda_2}
+                    - 
+                    \frac{1}{\sqrt{\lambda_2 \lambda_3}}
+                    \bigg[
+                        m_a^2 \sqrt{G_1 G_2} \cos (\varphi_1 - \varphi_2) \\
+                        &\hphantom{=\frac{1}{4 m_a^2}\bigg\{} + 
+                        \big(\sqrt{\Lambda_1 \Lambda_2} - 2 (t_1 + t_2 - m_2^2)\big)
+                        \big(\sqrt{\Lambda_2 \Lambda_3} - 2 (t_2 + t_3 - m_3^2)\big)
+                    \bigg] \\
+            &\hphantom{=\frac{1}{4 m_a^2}\bigg\{} -
+            \bigg(
+            % Q1 dot Q3
+            \sqrt{\Lambda_1 \Lambda_3} - \sqrt{\frac{\lambda_3}{\lambda_2}} 
+                    \big[
+                        \sqrt{\Lambda_1 \Lambda_2} - 2 m_a^2(t_1 + t_2 - m_2^2)
+                    \big]
+            \bigg)
+            \bigg\} \\
+            &\hphantom{=}+
+            % Q2 dot Q3
+            \frac{1}{2}(t_3 - t_2 - m_3^2) \; .
+        \end{aligned}
+    \end{gather}
+\end{bluenv}

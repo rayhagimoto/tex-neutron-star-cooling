@@ -14,6 +14,7 @@
 % Math stuff
 \usepackage{amsmath, amsfonts, bbold}
 \usepackage{physics}
+\usepackage[nomessages]{fp} % Doing arithmetic in latex using, e.g., \FPeval
 
 \usepackage{mathrsfs} % Fancy script capitals
 \usepackage{cancel}
@@ -157,6 +158,9 @@
 \newcommand{\fref}[1]{fig.~(\ref{#1})}
 \newcommand{\Fref}[1]{Fig.~(\ref{#1})}
 
+% Appendices
+\newcommand{\appref}[1]{appendix~\ref{#1}}
+\newcommand{\Appref}[1]{Appendix~\ref{#1}}
 % -----
 % Subsections, environments
 % -----
@@ -170,7 +174,8 @@
 % ----
 % Physics
 % ----
-\newcommand{\pvec}{\bm{p}}
+\newcommand*{\pvec}[1][]{\ensuremath{\bm{p}_{#1}}}
+\newcommand*{\pmag}[1][]{\ensuremath{|\bm{p}_{#1}|}}
 
 
 % ----

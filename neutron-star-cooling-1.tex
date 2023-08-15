@@ -116,3 +116,23 @@ Now that we have an expression for $p_{3'}$ the requirement that $p_{3'}$ must b
 \hl{I am not sure how to derive the new limits so I got stuck here.}
 
 
+% ====
+% SUBSECTION: Wisdom from Weinberg
+% ==== 
+\subsec{Weinberg's wisdom}
+\label{subsec:Weinberg}
+
+\hl{Update: 11 Aug 2023:} I talked to Hong-Yi today and he pointed out page 141 of Weinberg QFT vol. I where the following treatment is done for the outgoing particle phase space measure.
+
+\begin{enumerate}
+    \item Use momentum conservation to eliminate one of the momenta, e.g. $\pvec[1]$.
+    \item Rewrite integrals over other two momenta in spherical polar coords so that $\dd^3 p_2 \, \dd^3 p_3 = \pmag[2]^2 \dd \pmag[2] \, \pmag[3]^2 \dd \pmag[3] \dd \Omega_3 \, \dd \phi_{23} \, \dd \cos \theta_{23}$ .
+    \item $\cos \theta_{23}$ is then fixed by energy conservation:
+        \begin{align}
+            \sqrt{
+                \pmag[2]^2 + 2\pmag[2]\pmag[3] \cos \theta_{23} + \pmag[3]^2 + m_1^2
+            }
+            + \sqrt{\pmag[2]^2 + m_2^2} + \sqrt{\pmag[3]^2 + m_3^2} = E .
+        \end{align}
+    \item This yields $\delta^4 ( p_{\mathrm{in}} - p_{\mathrm{out}}) \dd \beta \rightarrow \pmag[2] \dd \pmag[2] \pmag[3] \dd \pmag[3] E_1 \dd \Omega_3 \dd \phi_{23}$. Rewriting in terms of energies gives $E_1 E_2 E_3 \dd E_2 \dd E_3 \dd \Omega_{3} \dd \phi_{23}$ .
+\end{enumerate}

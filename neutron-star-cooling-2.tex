@@ -44,8 +44,8 @@ The upper limit is obtained by requiring that
 \begin{align}
     |\bm{p}_n|^2 = \frac{\lambda(s, M_{n-1}^2, m_n^2)}{4 s}
 \end{align}
-be positive whereas the lower limit is threshold below which $R_{n-1}(M_{n-1}^2) = 0$\footnotemark. 
-Repeated application of \eref{eq:recursive-phase-space-relation} yields 
+be positive whereas the lower limit is threshold below which $R_{n-1}(M_{n-1}^2) = 0$.\footnotemark 
+ Repeated application of \eref{eq:recursive-phase-space-relation} yields 
 \begin{equation}
 \begin{aligned}
     R_n&(s) 
@@ -129,10 +129,10 @@ Some of the dot products (but not all) may be written exclusively in terms of th
         & && && 2p_b \cdot p_2 = 2 p_2 \cdot p_3 + m_2^2 + t_2 - t_1
     \end{align*}
 \end{gather*}
-However I was unable to write $p_2 \cdot p_3$ in terms of the invariants alone. 
-$p_b \cdot p_2$ is really just $p_2 \cdot p_3$ in disguise so it has the same problem.
+I could not write $p_2 \cdot p_3$ in terms of the kinematic invariants alone.
 This is because we need $3(3) - 4 = 5$ integration variables. Right now we only have $t_1,\ t_2,\ M_2^2$ which is not enough to fully describe the system; two more are required. 
 The additional degrees of freedom are given by the azimuthal angles of the $\bm{Q}_i$ vectors $\varphi_1$, $\varphi_2$ as seen in a frame where $p_a = (m_a, \bm{0})$ (cf. \eref{eq:recursive-momentum-transfer-k} which is eq. (14) of~\cite{Byckling:1969sx}.)
+The result for $p_2 \cdot p_3$ in terms of the kinematic invariants $+$ the angles is presented in \appref{app:2-dot-3}.
 
 To transform $R_n$ into a form in which the momentum transfers appear as variables we must consider the phase space integral as a function of $p_a$ and $-p_b \equiv Q_n$ separately: $R_n = R_n(p_a, Q_n)$. 
 Let $Q_i = p_a - p_1 - \cdots - p_i$ so that $p_i = Q_{i-1} - Q_i$. 
@@ -234,5 +234,69 @@ $\varphi_{n-1}$ defines the azimuthal angle of $\bm{Q}_{n-1}$ in the frame $p_a 
     \end{gather}
 \end{bluenv}
 
+To use this method we rewrite the integrand by making the replacements:
+\begin{align}
+    E_i &\rightarrow \frac{s_{i-1} - s_i - m_i^2}{2\sqrt{s_i}} \\
+    2 p_a \cdot p_1 &\rightarrow m_a^2 +  m_1^2 - t_1 \\
+    2 p_a \cdot p_2 &\rightarrow s_2 - m_1^2 + t_1 - t_2 \\
+    2 p_a \cdot p_3 &\rightarrow t_2 - t_3 - s_2 + s_3 \\
+    2 p_1 \cdot p_2 &\rightarrow s_2 - m_1^2 - m_2^2 \\
+    2p_b \cdot p_3 &\rightarrow m_3^2 + t_3 - t_2 \\
+    2p_b \cdot p_2 &\rightarrow 2 p_2 \cdot p_3 + m_2^2 + t_2 - t_1 \\
+    2 p_2 \cdot p_3 &\rightarrow 
+        \frac{1}{2 m_a^2} 
+        \bigg\{
+        % Q1 dot Q2
+        \sqrt{\Lambda_1 \Lambda_2}
+                - 
+                \frac{1}{\sqrt{\lambda_2 \lambda_3}}
+                \bigg[
+                    m_a^2 \sqrt{G_1 G_2} \cos (\varphi_1 - \varphi_2) \\
+                    &\hphantom{=\frac{1}{4 m_a^2}\bigg\{} + 
+                    \big(\sqrt{\Lambda_1 \Lambda_2} - 2 (t_1 + t_2 - m_2^2)\big)
+                    \big(\sqrt{\Lambda_2 \Lambda_3} - 2 (t_2 + t_3 - m_3^2)\big)
+                \bigg] \\
+        &\hphantom{=\frac{1}{4 m_a^2}\bigg\{} -
+        \bigg(
+        % Q1 dot Q3
+        \sqrt{\Lambda_1 \Lambda_3} - \sqrt{\frac{\lambda_3}{\lambda_2}} 
+                \big[
+                    \sqrt{\Lambda_1 \Lambda_2} - 2 m_a^2(t_1 + t_2 - m_2^2)
+                \big]
+        \bigg)
+        \bigg\} \\
+        &\hphantom{=}+
+        % Q2 dot Q3
+        \frac{1}{2}(t_3 - t_2 - m_3^2) \ .
+\end{align}
 
 \footnotetext{$M_1^2 = m_1^2$,  $M_3^2 = s$ and  $t_3 = (-p_b)^2 = m_b^2$ are all constants, not integration variables.}  
+
+\newpage
+\begin{bluenv}{Random number generation for Monte Carlo}
+    To sample $s_i$ we generate a uniform random variable $r_i \sim \mathrm{U}(0,1)$ and compute
+    \begin{equation}
+        \sqrt{s_i} = r_i \left(\sqrt{s_n} - \sum_{j=1}^{n} m_j\right) + \sum_{j=1}^{n} m_j\ .
+    \end{equation}
+    Next, we take the generated value of $s_i$ (let's call it $s_i^{\mathrm{gen}}$ and use it to calculate the upper and lower bounds from which we generate $t_i$.
+    To do this we solve
+    Solve $G(t_{i}, s_{i+1}, s_{i}^\mathrm{gen}, t_{i+1}, m_{i+1}^2, m_a^2) = 0$ for $t_{i}$. 
+    This yields,
+    \begin{gather}
+        \begin{aligned}
+            t_{i}^{\pm} 
+            =\ 
+            &t_{i+1} + m_{i+1}^2 + (2 s_{i+1})^{-1} \\
+            & \times
+            \bigl[
+                (s_{i}^\mathrm{gen} - s_{i+1} - m_{i+1}^2)(t_{i+1} + s_{i+1} - m_a^2) \pm \sqrt{\lambda(s_{i}^\mathrm{gen}, s_{i+1}, m_{i+1}^2)\lambda(t_{i+1},s_{i+1},m_a^2)}
+            \bigr] \ .
+        \end{aligned} 
+    \end{gather}
+    So,
+    \begin{equation}
+        t_i^{\mathrm{gen}} = \gamma_i (t_i^+ - t_i^-) + t_i^-
+    \end{equation}
+    where $\gamma_i \sim \mathrm{U}(0,1)$ is another uniform random variable. 
+\end{bluenv}
+

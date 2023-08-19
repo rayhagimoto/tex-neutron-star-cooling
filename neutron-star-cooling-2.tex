@@ -132,6 +132,12 @@ Some of the dot products (but not all) may be written exclusively in terms of th
 I could not write $p_2 \cdot p_3$ in terms of the kinematic invariants alone.
 This is because we need $3(3) - 4 = 5$ integration variables. Right now we only have $t_1,\ t_2,\ M_2^2$ which is not enough to fully describe the system; two more are required. 
 The additional degrees of freedom are given by the azimuthal angles of the $\bm{Q}_i$ vectors $\varphi_1$, $\varphi_2$ as seen in a frame where $p_a = (m_a, \bm{0})$ (cf. \eref{eq:recursive-momentum-transfer-k} which is eq. (14) of~\cite{Byckling:1969sx}.)
+It is worth describing in more detail the meaning of the angles $\varphi_1$ and $\varphi_2$. 
+I realised on \hl{Aug 18 2023} that these azimuthal angles can't be measured from the same axis. 
+The reason for this is the derivation of \eref{eq:recursion-momentum-transfer} and \eref{eq:recursive-momentum-transfer-k} involved a step where we rewrote $\dd^3 Q_{n-1}$ as $\Qmag{n-1}^2 \, \dd \Qmag{n-1} \, \dd \cos \theta_{n-1} \dd \varphi_{n-1}$. 
+This transformation requires that $\theta_{n-1}$ be measured from a polar axis and $\varphi_{n-1}$ be measured in the plane perpendicular to that axis.
+Since $\theta_{i}$ is defined as the angle between $\Qvec{i}$ and $\Qvec{i+1}$ we find that $\varphi_{i}$ and $\varphi_{i+1}$ are not measured in the same plane.
+
 The result for $p_2 \cdot p_3$ in terms of the kinematic invariants $+$ the angles is presented in \appref{app:2-dot-3}.
 
 To transform $R_n$ into a form in which the momentum transfers appear as variables we must consider the phase space integral as a function of $p_a$ and $-p_b \equiv Q_n$ separately: $R_n = R_n(p_a, Q_n)$. 
@@ -221,6 +227,7 @@ $\varphi_{n-1}$ defines the azimuthal angle of $\bm{Q}_{n-1}$ in the frame $p_a 
 \begin{bluenv}{$R_n$ for $n = 3$}
     \vspace{-3ex}
     \begin{align}
+        \label{eq:recursive-phase-space-with-momentum-transfer-for-n=3}
         R_3(s_3, t_3) 
             = \frac{1}{4\sqrt{\lambda(s_3, t_3, m_a^2)}}
               \int \frac{\dd s_2 \dd t_2 \dd \varphi_2}
@@ -234,16 +241,16 @@ $\varphi_{n-1}$ defines the azimuthal angle of $\bm{Q}_{n-1}$ in the frame $p_a 
     \end{gather}
 \end{bluenv}
 
-To use this method we rewrite the integrand by making the replacements:
+To use this method we rewrite the integrand by making the replacements:\todo{This is incorrect. In particular \eref{eq:energy-replacement-formula} doesn't work because the thermal distributions $f$ are not Lorentz invariant. The $E_i$ that shows up in \eref{eq:emissivity-integral} is the energy \emph{as seen in the rest frame of the NS}. Furthermore, \eref{eq:p2-dot-p3-replacement-rule} was derived using incorrect assumptions that are not corrected in the appendix.}
 \begin{align}
-    E_i &\rightarrow \frac{s_{i-1} - s_i - m_i^2}{2\sqrt{s_i}} \\
+    E_i &\rightarrow \frac{s_{i-1} - s_i - m_i^2}{2\sqrt{s_i}} \label{eq:energy-replacement-formula} \\ 
     2 p_a \cdot p_1 &\rightarrow m_a^2 +  m_1^2 - t_1 \\
     2 p_a \cdot p_2 &\rightarrow s_2 - m_1^2 + t_1 - t_2 \\
     2 p_a \cdot p_3 &\rightarrow t_2 - t_3 - s_2 + s_3 \\
     2 p_1 \cdot p_2 &\rightarrow s_2 - m_1^2 - m_2^2 \\
     2p_b \cdot p_3 &\rightarrow m_3^2 + t_3 - t_2 \\
     2p_b \cdot p_2 &\rightarrow 2 p_2 \cdot p_3 + m_2^2 + t_2 - t_1 \\
-    2 p_2 \cdot p_3 &\rightarrow 
+    2 p_2 \cdot p_3 &\rightarrow  \label{eq:p2-dot-p3-replacement-rule}
         \frac{1}{2 m_a^2} 
         \bigg\{
         % Q1 dot Q2
@@ -269,6 +276,7 @@ To use this method we rewrite the integrand by making the replacements:
         % Q2 dot Q3
         \frac{1}{2}(t_3 - t_2 - m_3^2) \ .
 \end{align}
+where $\Lambda_i$ and $\lambda_i$ are defined in \eref{eq:app-lambda-definitions}.
 
 \footnotetext{$M_1^2 = m_1^2$,  $M_3^2 = s$ and  $t_3 = (-p_b)^2 = m_b^2$ are all constants, not integration variables.}  
 
@@ -278,19 +286,20 @@ To use this method we rewrite the integrand by making the replacements:
     \begin{equation}
         \sqrt{s_i} = r_i \left(\sqrt{s_n} - \sum_{j=1}^{n} m_j\right) + \sum_{j=1}^{n} m_j\ .
     \end{equation}
-    Next, we take the generated value of $s_i$ (let's call it $s_i^{\mathrm{gen}}$ and use it to calculate the upper and lower bounds from which we generate $t_i$.
-    To do this we solve
-    Solve $G(t_{i}, s_{i+1}, s_{i}^\mathrm{gen}, t_{i+1}, m_{i+1}^2, m_a^2) = 0$ for $t_{i}$. 
+    Next, we take the generated value of $s_i$ (let's call it $\bar{s}_{i}$) and use it to calculate the upper and lower bounds from which we generate $t_i$.
+    \newline To do this we solve
+    $G(t_{i}, s_{i+1}, \bar{s}_{i}, t_{i+1}, m_{i+1}^2, m_a^2) = 0$ for $t_{i}$. 
     This yields,
     \begin{gather}
         \begin{aligned}
             t_{i}^{\pm} 
             =\ 
-            &t_{i+1} + m_{i+1}^2 + (2 s_{i+1})^{-1} \\
-            & \times
-            \bigl[
-                (s_{i}^\mathrm{gen} - s_{i+1} - m_{i+1}^2)(t_{i+1} + s_{i+1} - m_a^2) \pm \sqrt{\lambda(s_{i}^\mathrm{gen}, s_{i+1}, m_{i+1}^2)\lambda(t_{i+1},s_{i+1},m_a^2)}
-            \bigr] \ .
+            &t_{i+1} + m_{i+1}^2 + \\
+            & \times 
+            \frac{
+                (\bar{s}_{i} - s_{i+1} - m_{i+1}^2)(t_{i+1} + s_{i+1} - m_a^2) \pm \sqrt{\lambda(\bar{s}_{i}, s_{i+1}, m_{i+1}^2)\lambda(s_{i+1},t_{i+1},m_a^2)}
+            }
+            {2\,s_{i+1}} \ .
         \end{aligned} 
     \end{gather}
     So,
@@ -298,5 +307,23 @@ To use this method we rewrite the integrand by making the replacements:
         t_i^{\mathrm{gen}} = \gamma_i (t_i^+ - t_i^-) + t_i^-
     \end{equation}
     where $\gamma_i \sim \mathrm{U}(0,1)$ is another uniform random variable. 
+    This procedure requires us to weight the generated event by a factor of $(t_i^{+} - t_i^{-})$.
+
+    $\varphi_1$ and $\varphi_2$ are sampled independently from $\mathrm{U}(0,2\pi)$.
 \end{bluenv}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\linewidth]{figs/kinematic-variable-diagram.png}
+    \caption{
+        Illustration of sampling from the physical region of parameter space dictated by the $\Theta(-G_i)$ step-functions in \eref{eq:recursive-phase-space-with-momentum-transfer-for-n=3}. 
+        \emph{(Left:)}
+        Region of the $(t_2, s_2)$ plane where $G_2$ is negative (shaded blue).
+        This corresponds to the physically allowed region of parameter space.
+        The boundary of the region is established by the condition $G_2 = 0$.
+        The lower horizontal dashed line is a lower bound established in the case when the C.M. energy of the effective particle $(p_1 + p_2)$ only has enough energy to create the particle with no kinetic energy ($s_2 = (m_1 + m_2)^2$). 
+        The upper bound is established when the center of mass energy of $(p_1 + p_2 + p_3)$ creates $p_3$ at rest so that $p_3 = (m_3, 0)$ and the remaining energy is used to create $(p_1 + p_2)$ and supply it with kinetic energy.
+        The thick black bars show values of the parameters created using the routine described in the box ``Random number generation for Monte Carlo''.
+    }
+    \label{<label>}
+\end{figure}
 

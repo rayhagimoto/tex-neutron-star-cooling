@@ -1,0 +1,20 @@
+\section{16 Aug 2023: Lorentz transformations of FD distributions}
+\label{sec:lorentz-transformation-of-FD-distributions}
+
+The thermal factors in \eref{eq:emissivity-integral} are a source of confusion for me right now. 
+When I was rewriting the LIPS measure I derived identities like 
+\begin{equation}
+    \pmag[i]^2 = \frac{(s_i - s_{i-1} - m_i^2)}{4 s_i}
+\end{equation}
+by boosting into the center of mass frame of the decaying intermediate particle $p_1 + \cdots + p_{i} = (\sqrt{s_{i}}, \bm{0})$. 
+This is inconsequential if the integrand is lorentz invariant. 
+For example if we were just integrating over the spin-summed matrix element this would not matter. 
+However, the thermal factors $f_a f_b (1-f_1)(1-f_2)$ (where I have ignored the $(1+f_3)$ factor since the axion is effectively free streaming and therefore receives negligible Bose-enhancement) are not Lorentz invariant.
+In other words, I must make sure that the $E_a$ in $f_{FD}(E_a)$ is the energy of particle $a$ in the rest frame of the neutron star; the $E_1$ in $f_{FD}(E_1)$ is the energy of particle $1$ in the rest frame of the neutron star, and so on.
+\hl{This means that {\eref{eq:energy-replacement-formula}} is not the correct replacement rule since it is valid only in the frame where $p_1 + \cdots + p_i = (\sqrt{s_i}, \bm{0})$.}
+\begin{align}
+    p_1^{NS} = \Lambda p_1^{p_1 = (m_1, \bm{0})}
+\end{align}
+
+We know the value of $\pmag[2]$ in the frame where $\pvec[1] + \pvec[2] = 0$.
+To get $E_i^{NS}$ we must boost into the rest frame of the NS where particles $a$ and $b$ have momenta $\pvec[a]^{NS}, \pvec[b]^{NS}$.

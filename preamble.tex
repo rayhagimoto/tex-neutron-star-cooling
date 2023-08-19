@@ -30,7 +30,7 @@
 
 % Equation numbering by section, subsection.
 \numberwithin{equation}{section} % this command comes from amsmath
-\renewcommand{\theequation}{\arabic{section}.\arabic{equation}} 
+% \renewcommand{\theequation}{\arabic{section}.\arabic{equation}} 
 
 % New paragraphs aren't indented.
 \usepackage{parskip}
@@ -183,3 +183,9 @@
 % ----
 % Number any equation.
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+% ----
+% Macros specific to this project
+% ----
+\newcommand{\Qvec}[1]{\bm{Q}_{#1}}
+\newcommand{\Qmag}[1]{|\bm{Q}_{#1}|}

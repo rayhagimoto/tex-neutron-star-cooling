@@ -3,18 +3,18 @@
 %====
 % Macros for App. B:
 \newcommand*{\sintheta}[2]{
-    \sqrt{\frac{m_a^2 (-G_{#1})}{\lambda_{#1} \lambda_{#2}}}
+    \sqrt{\frac{4 m_a^2 (-G_{#1})}{\lambda_{#1} \lambda_{#2}}}
 }
 \newcommand*{\costheta}[2]{
     \frac{\sqrt{\Lambda_{#1} \Lambda_{#2}} - 2 m_a^2 (t_{#1} + t_{#2} - m_{#2}^2)}{\sqrt{\lambda_{#1}\lambda_{#2}}}
 }
 
 \section{Evaluating $2 p_2 \cdot p_3$}
-\newcommand{\Qvec}[1]{\bm{Q}_{#1}}
-\newcommand{\Qmag}[1]{|\bm{Q}_{#1}|}
 \label{app:2-dot-3}
+
 Let $\varepsilon_i = Q_i^0 = \sqrt{\Qmag{i}^2 + t_i}$. Then,
 \begin{equation}
+    \label{eq:p2_dot_p3-Minkowski-dot-product}
     \begin{aligned}
         p_2 \cdot p_3 
         &=
@@ -31,25 +31,59 @@ Let $\varepsilon_i = Q_i^0 = \sqrt{\Qmag{i}^2 + t_i}$. Then,
         \varepsilon_2 \varepsilon_3 - \Qvec{2}\cdot\Qvec{3} \, . 
     \end{aligned}
 \end{equation}
-To simplify things we choose to measure angles relative to $\Qvec{3} = -\bm{p}_b$. This frame is compatible with the discussion in the main text because there we chose to measure angles in a frame where $p_a = (m_a, \bm{0})$, so we have not assumed $\pvec[b] = 0$. Therefore, 
+From \eref{eq:p2_dot_p3-Minkowski-dot-product} it is clear that we need to know the angles between vectors $\Qvec{1}$ and $\Qvec{2}$, $\Qvec{1}$ and $\Qvec{3}$, and $\Qvec{2}$ and $\Qvec{3}$ in terms of the integration variables $t_1, t_2, s_2, \varphi_1, \varphi_2$. 
+We already have formulas for all of these (cf. eqs.~(\ref{eq:B-Qmag-formula}-\ref{eq:B-sintheta-formula})) except for the angle between $\Qvec{1}$ and $\Qvec{3}$ defined by $\cos\theta_{13}$. 
+To obtain this formula we first pick to align the $z$-axis with $\Qvec{3}$ so that
 \begin{align}
-    \Qvec{1} &= \cos \varphi_1 \sin \theta_1 \hat{\bm{i}} + \sin \varphi_1 \sin \theta_1 \hat{\bm{j}} + \cos \theta_1 \hat{\bm{k}} \\
-    \Qvec{2} &= \cos \varphi_2 \sin \theta_2 \hat{\bm{i}} + \sin \varphi_2 \sin \theta_2 \hat{\bm{j}} + \cos \theta_2 \hat{\bm{k}} \\
-    \Qvec{3} &= \hat{\bm{k}} \; .
+    \Qvec{1} &= \Qmag{1} (\cos \varphi_{13} \sin \theta_{13} \hat{\bm{i}} + \sin \varphi_{13} \sin \theta_{13} \hat{\bm{j}} + \cos \theta_{13} \hat{\bm{k}}) \\
+    \Qvec{2} &= \Qmag{2} (\cos \varphi_2 \sin \theta_2 \hat{\bm{i}} + \sin \varphi_2 \sin \theta_2 \hat{\bm{j}} + \cos \theta_2 \hat{\bm{k}}) \\
+    \Qvec{3} &= \Qmag{3} \hat{\bm{k}} \; .
 \end{align}
-Moreover, 
-\begin{align}
-    \Qmag{i} &= \frac{\sqrt{\lambda_i}}{2 m_a} \\
-    \varepsilon_i &= \frac{\sqrt{\Lambda_i}}{2 m_a} \\
-    \cos \theta_i &= \frac{\sqrt{\Lambda_i \Lambda_{i+1}} - 2 m_a^2 (t_i + t_{i+1} - m_{i+1}^2)}{\sqrt{\lambda_i \lambda_{i+1}}} \\
-    \sin\theta_i &= \sintheta{i}{i+1}
-\end{align}
+Then, 
+\begin{equation}
+    \frac{\Qvec{1}\cdot\Qvec{2} }{\Qmag{1}\Qmag{2}}\equiv \cos \theta_1 = \sin \theta_2  \cos(\varphi_1 - \varphi_2) \sin \theta_{13} + \cos\theta_2 \cos\theta_{13} .
+\end{equation}
+This can be rearranged to solve for $\theta_{13}$ to obtain
+\begin{equation}
+    \cos \theta_{13} = \frac{\cos \theta_1 \cos \theta_2 \pm \sin \theta_2 \cos(\varphi_1 - \varphi_2) \sqrt{\cos^2 \theta_2 + \cos^2(\varphi_1 - \varphi_2) \sin^2 \theta_2 - \cos^2 \theta_1}}{\cos^2 \theta_2 + \cos^2(\varphi_1 - \varphi_2) \sin^2 \theta_2} \; .
+\end{equation}
+Substituting $\cos \theta_i$ and $\sin \theta_i$ using eqs.~(\ref{eq:B-costheta-formula}) and~(\ref{eq:B-sintheta-formula}) yields
+\begin{equation}
+    \cos \theta_{13} =
+    \frac
+        {   \sqrt{\frac{\lambda_3}{\lambda_1}} \xi_1 \xi_2
+            +
+            \eta_2
+            \sqrt{\eta_2^2 - \frac{\lambda_3}{\lambda_1}\xi_1^2 + \xi_2^2}
+        }
+        {
+            \xi_2^2 +\eta_2^2
+        }
+\end{equation}
 where
-\begin{align}
-    \lambda_i &\equiv \lambda(s_i, t_i, m_a^2) \\
-    \Lambda_i &\equiv \lambda_i + 4 m_a^2 t_i = (s_i - t_i - m_a^2)^2 \\
-    G_i &\equiv G(t_i, s_{i+1}, s_i, t_{i+1}, m_{i+1}^2, m_a^2) . 
-\end{align}
+\begin{equation}
+    \eta_2^2 \equiv (-G_2) m_a^2 \cos^2(\varphi_1 - \varphi_2) \; .
+\end{equation}
+\reversemarginpar\marginnote{Note that in~\cite{Byckling:1969sx} there is a typo in their eq. (12b): they are missing a factor of $4$ which is present in my \eref{eq:B-sintheta-formula}.}
+\begin{bluenv}{Formulas for angles and magnitudes in terms of integration variables}
+    \vspace{-2ex}
+    \begin{align}
+        \Qmag{i} &= \frac{\sqrt{\lambda_i}}{2 m_a} \label{eq:B-Qmag-formula}\\
+        \varepsilon_i &= \frac{\sqrt{\Lambda_i}}{2 m_a} \label{eq:B-epsilon-formula}\\
+        \cos \theta_i &\equiv \frac{\Qvec{i}\cdot\Qvec{i+1}}{\Qmag{i}\Qmag{i+1}} 
+            =  \frac{\xi_i}{\sqrt{\lambda_i \lambda_{i+1}}} \label{eq:B-costheta-formula}\\
+        \sin\theta_i &= \sintheta{i}{i+1} \label{eq:B-sintheta-formula}
+    \end{align}
+    where
+    \begin{align}
+        \label{eq:app-lambda-definitions}
+        \lambda_i &\equiv \lambda(s_i, t_i, m_a^2) \\
+        \Lambda_i &\equiv \lambda_i + 4 m_a^2 t_i = (s_i - t_i - m_a^2)^2 \\
+        G_i &\equiv G(t_i, s_{i+1}, s_i, t_{i+1}, m_{i+1}^2, m_a^2) < 0 \\
+        \xi_i &\equiv \sqrt{\Lambda_i \Lambda_{i+1}} - 2 m_a^2 (t_i + t_{i+1} - m_{i+1}^2) \; .
+    \end{align}
+\end{bluenv}
+
 Now we can use these identities to evaluate the dot products $Q_2 \cdot Q_3$, $Q_1 \cdot Q_3$, and $Q_1 \cdot Q_2$:
 % Q2 dot Q3
 \begin{gather}
@@ -65,19 +99,7 @@ Now we can use these identities to evaluate the dot products $Q_2 \cdot Q_3$, $Q
 % Q1 dot Q3
 \begin{gather}
     \begin{aligned}
-        Q_1 \cdot Q_3 
-        &= 
-        \frac{\sqrt{\Lambda_1 \Lambda_3}}{4 m_a^2} 
-            - \frac{\sqrt{\lambda_1 \lambda_3}}{4 m_a^2} 
-            \frac{\sqrt{\Lambda_1 \Lambda_2} - 2m_a^2(t_1 + t_2 - m_2^2)}{\sqrt{\lambda_1 \lambda_2}} \\
-            &= 
-            \frac{1}{4 m_a^2}
-            \bigg \{
-                \sqrt{\Lambda_1 \Lambda_3} - \sqrt{\frac{\lambda_3}{\lambda_2}} 
-                \big[
-                    \sqrt{\Lambda_1 \Lambda_2} - 2 m_a^2(t_1 + t_2 - m_2^2)
-                \big]
-            \bigg \}
+        Q_1 \cdot Q_3 = \varepsilon_1 \varepsilon_3 - \Qmag{1}\Qmag{3} \cos \theta_{13}
     \end{aligned}
 \end{gather}
 % Q1 dot Q2
@@ -89,79 +111,15 @@ Now we can use these identities to evaluate the dot products $Q_2 \cdot Q_3$, $Q
                 - \Qmag{1} \Qmag{2} 
                 \bigl(
                     \sin \theta_1 \sin \theta_2 \cos(\varphi_1 - \varphi_2) + \cos \theta_1 \cos \theta_2
-                \bigr) \\
-            &=
-            \frac{\sqrt{\Lambda_1 \Lambda_2}}{4 m_a^2}
-            - \frac{\sqrt{\lambda_1 \lambda_2}}{4 m_a^2}
-            \bigg[
-                \sintheta{1}{2}
-                \sintheta{2}{3}
-                \cos(\varphi_1 - \varphi_2)
-                + \cos\theta_1 \cos\theta_2
-            \bigg] \\
-            &=
-            \frac{\sqrt{\Lambda_1 \Lambda_2}}{4 m_a^2}
-            - \frac{\sqrt{\lambda_1 \lambda_2}}{4 m_a^2}
-            \bigg[
-                \sintheta{1}{2}
-                \sintheta{2}{3}
-                \cos(\varphi_1 - \varphi_2) \\
-                & \hphantom{=\quad} + \costheta{1}{2} \costheta{2}{3}
-            \bigg] \\
-            &=
-            \frac{\sqrt{\Lambda_1 \Lambda_2}}{4 m_a^2}
-            - \frac{1}{4 m_a^2}
-            \bigg[
-                m_a^2 \sqrt{\frac{(G_1)(G_2)}{\lambda_2 \lambda_3}}
-                \cos(\varphi_1 - \varphi_2) \\
-                & \hphantom{=\quad} +
-                (\sqrt{\Lambda_1 \Lambda_2} - 2 m_a^2 (t_1 + t_2 - m_2^2)) 
-                \costheta{2}{3}
-            \bigg] \\
-            &= 
-            \frac{1}{4 m_a^2}
-            \bigg \{
-                \sqrt{\Lambda_1 \Lambda_2}
-                - 
-                \frac{1}{\sqrt{\lambda_2 \lambda_3}}
-                \bigg[
-                    m_a^2 \sqrt{G_1 G_2} \cos (\varphi_1 - \varphi_2) \\
-                    &\hphantom{= \quad} 
-                    + 
-                    \big(\sqrt{\Lambda_1 \Lambda_2} - 2 (t_1 + t_2 - m_2^2)\big)
-                    \big(\sqrt{\Lambda_2 \Lambda_3} - 2 (t_2 + t_3 - m_3^2)\big)
-                \bigg]
-            \bigg \}
+                \bigr)
     \end{aligned}
 \end{gather}
 \begin{bluenv}{Main result of this appendix}
+\vspace{-3ex}
     \begin{gather}
         \begin{aligned}
             p_2 \cdot p_3 &= 
-            \frac{1}{4 m_a^2} 
-            \bigg\{
-            % Q1 dot Q2
-            \sqrt{\Lambda_1 \Lambda_2}
-                    - 
-                    \frac{1}{\sqrt{\lambda_2 \lambda_3}}
-                    \bigg[
-                        m_a^2 \sqrt{G_1 G_2} \cos (\varphi_1 - \varphi_2) \\
-                        &\hphantom{=\frac{1}{4 m_a^2}\bigg\{} + 
-                        \big(\sqrt{\Lambda_1 \Lambda_2} - 2 (t_1 + t_2 - m_2^2)\big)
-                        \big(\sqrt{\Lambda_2 \Lambda_3} - 2 (t_2 + t_3 - m_3^2)\big)
-                    \bigg] \\
-            &\hphantom{=\frac{1}{4 m_a^2}\bigg\{} -
-            \bigg(
-            % Q1 dot Q3
-            \sqrt{\Lambda_1 \Lambda_3} - \sqrt{\frac{\lambda_3}{\lambda_2}} 
-                    \big[
-                        \sqrt{\Lambda_1 \Lambda_2} - 2 m_a^2(t_1 + t_2 - m_2^2)
-                    \big]
-            \bigg)
-            \bigg\} \\
-            &\hphantom{=}+
-            % Q2 dot Q3
-            \frac{1}{2}(t_3 - t_2 - m_3^2) \; .
+            \text{something}
         \end{aligned}
     \end{gather}
 \end{bluenv}

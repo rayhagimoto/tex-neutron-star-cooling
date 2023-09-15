@@ -1,0 +1,180 @@
+\section{Tackling a simpler integral}
+\label{sec:a-simpler-integral}
+\hl{August 28 2023:} I spent the last week working on the response to the referee on my non-Gaussianity from axion-string birefringence paper. 
+Now I want to return to this integral project.
+
+I will try doing a simpler integral where the ingoing particle momenta $p_a$ and $p_b$ are fixed and we integrate only over the outgoing states. 
+I will also drop the Lorentz-invariance breaking thermal factors. 
+\begin{align}
+    \int \sum_{\sigma, \sigma'} | \mathcal{M} |^2 \dd \Phi_3(s)
+\end{align}
+
+I will take 
+\begin{align}
+    m_a &= m_e = 0.5 \ \mathrm{MeV} \\
+    m_b &= m_p = 938.272 \ \mathrm{MeV} \\
+    m_1 &= m_\mu = 106 \ \mathrm{MeV} \\
+    m_2 &= 0 \\
+    m_3 &= 0
+\end{align}
+and 
+\begin{align}
+    p_a &= (m_a, \bm{0}) \\
+    p_b &= (E_b, \bm{p}_b), \ \bm{p}_b = \bm{i} + \bm{j} + \bm{k}, \ E_b = \sqrt{|\pvec[b]|^2 + m_b^2}\ . 
+\end{align}
+
+%=====
+% SUBSECTION: Integrating directly over C.o.M. energies
+%=====
+\subsec{Integrating directly over CM energies}
+\label{subsec:simple-integral-CM-energies}
+
+%=====
+In this section I describe a technique for performing phase space integrals directly in terms of the variables $E_1,\, E_2,\, \varphi_{12},\, \cos\theta_{1},$ and $\varphi_{1}$ where all quantities are in the center of mass (CM) frame of the incident particles, $\pvec[a] + \pvec[b] = 0$. 
+
+Consider the LIPS measure for 3 outgoing particles
+\begin{align}
+    \dd \Phi_3 (s) = 
+    (2\pi)^{-5}
+    \delta^4(p_a + p_b - p_1 - p_2 - p_3)
+    \, \frac{\dd^3 p_1}{2 E_1} 
+    \, \frac{\dd^3 p_2}{2 E_2}
+    \, \frac{\dd^3 p_3}{2 E_3} \ .
+\end{align}
+We can use the momentum-conserving $\delta$-function to evaluate the $\dd^3 p_3$ integral so that in the CM frame we have
+\begin{align}
+    \dd \Phi_3 (s) \rightarrow
+    (2\pi)^{-5}
+    \delta(\sqrt{s} - E_1 - E_2 - E_3)
+    \, \frac{1}{2 E_3} 
+    \, \frac{\dd^3 p_1}{2 E_1} 
+    \, \frac{\dd^3 p_2}{2 E_2} \ ,
+\end{align}
+where in the above expression it is understood that $E_3$ is to be replaced with $\sqrt{(-\pvec[1] - \pvec[2])^2 + m_3^2}$.
+Now rewrite the $\dd^3 p_i$ integrals in spherical polar coordinates, 
+\begin{align}
+    \dd \Phi_3 (s) \rightarrow
+    (2\pi)^{-5}
+    \delta(\sqrt{s} - E_1 - E_2 - E_3)
+    \, \frac{1}{2 E_3} 
+    \, \frac{|\pvec[1]|^2 \dd |\pvec[1]| \, \dd \cos \theta_1 \, \dd \varphi_1}{2 E_1} 
+    \, \frac{|\pvec[2]|^2 \dd |\pvec[2]| \, \dd \cos \theta_{12} \, \dd \varphi_{12}}{2 E_2} \ .
+\end{align}
+$(\theta_{1}, \varphi_{1})$ give the polar and azimuthal angles of $\pvec[1]$ in the CM frame, whereas $(\theta_{12}, \varphi_{12})$ give the polar and azimuthal angles of $\pvec[2]$ relative to $\pvec[1]$. 
+This means that $\varphi_1$ and $\varphi_{12}$ are not measured in the same plane (unless $\theta_1 = 0$).
+We use the energy-conserving Dirac delta to evaluate the $\dd \cos \theta_{12}$ integral, obtaining
+\begin{align}
+    &\cos \theta_{12} =
+    \frac{s + 2 E_1 E_2 - 2 \sqrt{s}(E_1 + E_2) + m_1^2 + m_2^2 - m_3^2}{2 \sqrt{E_1^2 - m_1^2} \, \sqrt{E_2^2 - m_2^2}} \  , \\
+    &\frac{\dd}{\dd \cos\theta_{12}} (\sqrt{s} - E_1 - E_2 - E_3) = - \frac{2 |\pvec[1]| |\pvec[2]|}{E_3} \ , 
+\end{align} 
+so that the $\dd \cos \theta_{12}$ integral can be done by making the replacement $\delta(\sqrt{s} - E_1 - E_2 - E_3) \, \dd \cos \theta_{12} \rightarrow E_3 / (2 |\pvec[1]| |\pvec[2]|)$.
+Hence,
+\begin{equation}
+    \dd \Phi_3 (s) \rightarrow 
+    \frac{(2\pi)^{-5}}{2^3 E_1 E_2 E_3} 
+    \, \frac{E_3}{2 |\pvec[1]| |\pvec[2]|} 
+    \, |\pvec[1]|^2 |\pvec[2]|^2
+    \, \dd |\pvec[1]| \, \dd |\pvec[2]| 
+    \, \dd \cos \theta_1 \, \dd \varphi_1 
+    \, \dd \varphi_{12} \ .
+\end{equation}
+We also have 
+\begin{align}
+    |\pvec[i]|^2 = E_i^2 - m_i^2  \Rightarrow  |\pvec[i]| \dd |\pvec[i]| =  E_i \dd E_i \ , 
+\end{align}
+and so
+\begin{equation}
+    \dd \Phi_3 (s) \rightarrow 
+    \frac{(2\pi)^{-5}}{2^3} 
+    \, \dd E_1 \, \dd E_2 
+    \, \dd \cos \theta_1 \, \dd \varphi_1 
+    \, \dd \varphi_{12} \ .
+\end{equation}
+To obtain the limits of integration I found that it's actually easier to introduce the kinematic Lorentz invariants
+\begin{align}
+    s_1 &= (p_a + p_b - p_1)^2 = (p_2 + p_3)^2 \\
+    s_2 &= (p_a + p_b - p_2)^2 = (p_3 + p_1)^2 \\
+    s_3 &= (p_a + p_b - p_3)^2 = (p_1 + p_2)^2
+\end{align}
+which are related to the CM frame energies by $E_i = (s + m_1^2 - s_i)/2 \sqrt{s}$. 
+The $s_i$ are not independent and satisfy $s_1 + s_2 + s_3 = s + m_1^2 + m_2^2 + m_3^2$. 
+This excercise is done in detail in~\url{https://web.physics.utah.edu/~jui/5110/hw/kin_rel.pdf}. 
+The key results are as follows. 
+If none of the $s_i$ are fixed then $s_1 \in [(m_2 + m_3)^2, (\sqrt{s} - m_1)^2]$.
+If $s_1$ is picked from that interval then $s_2$ is bounded by 
+\begin{align}
+    \label{eq:s2-bounds}
+    s_2^{\pm} = m_1^2 + m_3^2 + \frac{1}{2 s_1} 
+    \left[
+        (s - s_1 - m_1^2)(s_1 - m_2^2 + m_3^2) \pm \sqrt{\lambda(s_1, s, m_1^2) \lambda(s_1, m_2^2, m_3^2) }
+    \right] \ .
+\end{align}
+Therefore to sample $(E_1, E_2, \cos \theta_1, \varphi_1, \varphi_{12})$ from the kinematically allowed region of phase space one may make use of the following procedure.
+\begin{enumerate}
+    \item Draw $E_1$ uniformly at random from the interval $[m_1, (s + m_1^2 - (m_2 + m_3)^2) / 2 \sqrt{s}]$. 
+    \item Draw $E_2$ uniformly at random from the interval $[\frac{s + m_2^2 - s_2^{+}}{2 \sqrt{s}}, \frac{s + m_2^2 - s_2^{-}}{2 \sqrt{s}}]$, where $s_2^{\pm}$ is given by~\eref{eq:s2-bounds} and $s_1$ takes the value generated in step 1.
+    \item Draw $\cos \theta_1$ uniformly from $[-1, 1]$.
+    \item Independently draw $\varphi_1$ and $\varphi_{12}$ uniformly from $[0, 2\pi]$. 
+\end{enumerate}
+The CM frame momentum vectors for the outgoing particles may then be reconstructed as
+\begin{align}
+    \pvec[1] &= \sqrt{E_1^2 - m_1^2} 
+    (\sin \theta_1 \cos\varphi_1 \mathbf{i} 
+    + \sin \theta_1 \, \sin\varphi_1 \mathbf{j} 
+    + \cos\theta_1 \mathbf{k}) \\
+    \pvec[2] &= \sqrt{E_2^2 - m_2^2} \, R^{-1}_{\theta_1, \varphi_1} 
+    (\sin \theta_{12} \cos\varphi_{12} \mathbf{i} 
+    + \sin \theta_{12} \, \sin\varphi_{12} \mathbf{j} 
+    + \cos\theta_{12} \mathbf{k}) \\
+    \pvec[3] &= - \pvec[1] - \pvec[2] \ ,
+\end{align}
+where $\sin \theta$ is given by$\sqrt{1 - \cos \theta^2}$ and $R_{\theta, \varphi}$ is a rotation matrix that takes $\mathbf{k}$ into the $(\theta, \varphi)$ direction (in particular, I used \texttt{R[theta\_, phi\_] := EulerMatrix[\{phi, theta, 0\}]}). 
+
+%====
+% SUBSECTION: Intermediate results
+%====
+\subsec{Preliminary results}
+\label{subsec:preliminary-results}
+
+%====
+% PHASE SPACE VOLUME 
+%====
+\subsubsection*{Phase space volume}
+The first check I did was to make sure that the phase space volume given by $\mathcal{I} = \int \dd \Phi_3(s)$ is the same for both techniques. 
+I calculated the phase space volume using the methods described in~\sref{subsec:simple-integral-CM-energies} and~\sref{subsec:momentum-transfers}.
+Performing a Monte Carlo integration over the energies as in~\sref{subsec:momentum-transfers} with chains of length $N = 100,000$, gave \hl{$\mathcal{I}_{\mathrm{Energy}} = 98.7 \pm 0.13$}. 
+The error is calculated as the standard deviation from 10 independent runs of the integration method. 
+The central value is the mean of the ten chains. 
+It took \hl{35 seconds} to run the ten chains for this method.
+Meanwhile doing the Monte Carlo integration using the momentum transfer technique as in~\sref{subsec:simple-integral-CM-energies} gave 
+\hl{$\mathcal{I}_{\mathrm{mom. trans.}} = 98.7 \pm 0.15$}.
+It took \hl{$60$ seconds} to run the ten chains for this method.
+I also verified that the variance goes as $N^{-1/2}$, as expected for Monte Carlo integration.
+
+%====
+% INTEGRAL OVER THE MATRIX ELEMENT
+%====
+\subsubsection*{$\overline{|\mathcal{M}|^2}$ integral}
+The second test I did was to integrate the spin-summed squared matrix element over the outgoing particles,
+\begin{align}
+    \int \overline{|\mathcal{M}|^2} \, \dd \Phi_3 (s) \ .
+\end{align}
+Below are the results for $N = 100,000$, using 10 runs to estimate the standard deviation:\\\\
+\hl{{\underline{Energy method:}}
+$(1.92 \pm 0.03) \times 10^{-2}$.
+Took $340$ seconds.}\\\\
+\hl{{\underline{Momentum transfer method:}}
+$(2.00 \pm 0.02) \times 10^{-2}$. 
+Took $51$ seconds.}
+
+They converge to different central values but they are still `close' with an error of $\sim 4\%$. 
+
+%====
+% INTEGRAL OVER THE MATRIX ELEMENT
+%====
+\subsubsection*{$E_3$ integral}
+The third test I did was to integrate the outgoing axion neutron-star-rest-frame energy, $E_3$
+\begin{align}
+    \int E_3 \, \dd \Phi_3 (s) \ .
+\end{align}

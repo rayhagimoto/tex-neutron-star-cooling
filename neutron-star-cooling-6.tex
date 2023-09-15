@@ -1,20 +1,45 @@
-\section{16 Aug 2023: Lorentz transformations of FD distributions}
-\label{sec:lorentz-transformation-of-FD-distributions}
-
-The thermal factors in \eref{eq:emissivity-integral} are a source of confusion for me right now. 
-When I was rewriting the LIPS measure I derived identities like 
+\section{Lorentz Transformations}
+I implement Lorentz boosts in arbitrary directions in the following way. A boost in the $+z$-direction that takes the vector $(m, 0, 0, 0)$ into $(E, 0, 0, |\pvec|)$ is given by 
 \begin{equation}
-    \pmag[i]^2 = \frac{(s_i - s_{i-1} - m_i^2)}{4 s_i}
+    \Lambda \big(|\pvec|, m \big) =
+    \begin{pmatrix}
+        \gamma & 0 & 0 & \sqrt{\gamma^2 - 1} \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0 \\
+        \sqrt{\gamma^2 - 1} & 0 & 0 & \gamma
+    \end{pmatrix}  \ ,
 \end{equation}
-by boosting into the center of mass frame of the decaying intermediate particle $p_1 + \cdots + p_{i} = (\sqrt{s_{i}}, \bm{0})$. 
-This is inconsequential if the integrand is lorentz invariant. 
-For example if we were just integrating over the spin-summed matrix element this would not matter. 
-However, the thermal factors $f_a f_b (1-f_1)(1-f_2)$ (where I have ignored the $(1+f_3)$ factor since the axion is effectively free streaming and therefore receives negligible Bose-enhancement) are not Lorentz invariant.
-In other words, I must make sure that the $E_a$ in $f_{FD}(E_a)$ is the energy of particle $a$ in the rest frame of the neutron star; the $E_1$ in $f_{FD}(E_1)$ is the energy of particle $1$ in the rest frame of the neutron star, and so on.
-\hl{This means that {\eref{eq:energy-replacement-formula}} is not the correct replacement rule since it is valid only in the frame where $p_1 + \cdots + p_i = (\sqrt{s_i}, \bm{0})$.}
-\begin{align}
-    p_1^{NS} = \Lambda p_1^{p_1 = (m_1, \bm{0})}
-\end{align}
+where $\gamma = \sqrt{|\pvec|^2 + m^2} / m$.
+Meanwhile, a rotation that takes the $z$-axis $(\,\cdot\,,\, 0,\, 0,\, 1)$ into the $(\theta, \phi)$ direction is given by 
+\begin{equation}
+    R(\theta, \phi) = 
+    \begin{pmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & \cos \theta \cos \phi & - \sin \phi & \cos \phi \sin \theta \\
+        0 & \cos \theta \sin \phi & \cos \phi & \sin \theta \sin \phi \\
+        0 & - \sin \theta & 0 & \cos \theta
+    \end{pmatrix} \ .
+\end{equation}
+Thus, a boost by momentum $|\pvec|$ in the direction $\hat{\bm{n}} \equiv (\theta, \phi)$ is given by $\Lambda\big(|\pvec|, m, \hat{\bm{n}}\big) \equiv R(\theta, \phi) \, \Lambda \big(|\pvec|, m \big) \, R^{-1}(\theta, \phi)$. 
+I had Mathematically symbolically evaluate this matrix and use that to evaluate boosts on four-vectors. 
 
-We know the value of $\pmag[2]$ in the frame where $\pvec[1] + \pvec[2] = 0$.
-To get $E_i^{NS}$ we must boost into the rest frame of the NS where particles $a$ and $b$ have momenta $\pvec[a]^{NS}, \pvec[b]^{NS}$.
+\subsec{Boosting in-state momenta}
+\label{subsec:boosting-in-state-momenta}
+Suppose the components of $p_a$ and $p_b$ as seen in the rest-frame of the neutron star are known.
+We will simply call this frame the NS frame and denote quantities as seen in this frame with a superscript.
+In order to make use of the momentum transfer method I need to perform a boost and rotation to obtain the components in a frame where $p_a = (m_a, \bm{0})$ and $\pvec[b] \propto - \hat{\mathbf{z}}$.
+We will refer to this frame as the rest frame of $a$, or simply just the `$a$ frame', denoting quantities as seen in this frame by a superscript $\mathrm{a}$.
+This is trivial for $p_a$: simply set $p_a = (m_a, \bm{0})$. 
+For $p_b$ we need only boost it by applying $\Lambda^{-1}\big(|\pvec[a]|, m_b, \hat{\bm{n}}_a \big)$ with $\bm{n}_a = (\theta_a, \phi_a)$ being the spherical coordinates of the direction of $\pvec[a]$. 
+Then, we can manually set $p_b = (E_b, 0, 0, -|\pvec[b]|)$. 
+Doing things this way helps reduce the room for matrix multiplication to introduce numerical errors in our results.
+
+In addition to this, recall that the out-state momenta $p_i$ will be generated from the integration variables $s_i, t_i, \varphi_i$ in the rest frame so in order to calculate quantities like $E_3^{\mathrm{NS}}$ we need to boost the $p_i$ vectors back into the neutron star rest frame.
+This can be done by calculating $\Lambda \big ( |\pvec[a], m_i, \hat{\bm{n}}_b^{\mathrm{NS}} \big)$ where $\hat{\bm{n}}_b^{\mathrm{NS}}$ gives the direction of $\pvec[b]^{\mathrm{NS}}$. 
+In the $a$ frame,
+\begin{align}
+    p_1^{\mathrm{a}} &= (p_a^\mathrm{a} - Q_1) \\
+    p_2^{\mathrm{a}} &= (Q_1 - Q_2) \\
+    p_3^{\mathrm{a}} &= (Q_2 + p_b^\mathrm{a}) \ .
+\end{align}
+These are converted to the NS frame by calculating $\Lambda \big (|\pvec[a]|, m_i, \hat{\bm{n}}\big) \, R(\theta_b^{\mathrm{NS}}, \phi_b^{\mathrm{NS}})$.

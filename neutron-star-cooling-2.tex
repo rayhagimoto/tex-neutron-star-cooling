@@ -1,14 +1,22 @@
+% MACROS:
+\newcommand*{\sintheta}[2]{
+    \sqrt{\frac{4 m_a^2 (-G_{#1})}{\lambda_{#1} \lambda_{#2}}}
+}
+\newcommand*{\costheta}[2]{
+    \frac{\sqrt{\Lambda_{#1} \Lambda_{#2}} - 2 m_a^2 (t_{#1} + t_{#2} - m_{#2}^2)}{\sqrt{\lambda_{#1}\lambda_{#2}}}
+}
+
 %===
 % SUBSECTION: A different approach taken from nuclear physics
 %===
 \subsec{A recursive expression for phase space integrals}
 \label{subsec:recursive-relation}
-The problem I ran into at the end of the last section was how to use the energy-momentum delta functions to restrict the bounds of integration. 
+The problem I ran into at the end of \sref{subsec:direct-momentum-integration} was how to use the energy-momentum delta functions to restrict the bounds of integration. 
 I spent some time searching the literature for useful references and the most promising were refs.~\cite{James:1968gu,Byckling:1969sx,Isaacson:2021xty}.
 \cite{James:1968gu} provides an introduction to Monte Carlo methods and discusses the phase space measure in sec. 9, which covers several ways to deal with the Dirac delta in the phase space integration measure by doing appropriate changes of variables.
-The most useful method, is covered in sec. 9.6 and is the same one used in \cite{Byckling:1969sx}. 
+The most useful method is covered in sec. 9.6 and is the same one used in \cite{Byckling:1969sx}. 
 Ref.~\cite{Byckling:1969sx} extends the treatment in sec. 9.6 of~\cite{James:1968gu} by also introducing momentum transfer variables. 
-My understanding is that this is appropriate when your matrix element is flat in terms of the momentum transfers.
+In this section we will introduce the formalism without momentum transfer variables and cover the case with momentum transfers in \sref{subsec:momentum-transfers}.
 
 Consider the phase space integral $R_n(p_a + p_b)$ defined by
 \begin{bluenv}{Phase space integral (without $2 \pi$ factors)}
@@ -26,7 +34,9 @@ Consider the phase space integral $R_n(p_a + p_b)$ defined by
 
 We note that $R_n(s)$ is related to $\dd \Phi_n(s)$ by
 \begin{equation}
-    R_n(s) = (2\pi)^{3n - 4} \int  \dd \Phi_n(s).
+    R_n(s) = (2\pi)^{3n - 4} \int  \dd \Phi_n(s) 
+    \quad \Rightarrow \quad 
+    \int \dd \Phi_3(s) = (2\pi)^{-5} R_3(s).
 \end{equation} 
 
 
@@ -40,11 +50,13 @@ It is possible to show that the following recursive relation holds (eqn. (3) of 
     \frac{\sqrt{\lambda(s, M_{n-1}^2, m_n^2)}}{8s} R_{n-1}(M_{n-1}^2)
 \end{align}
 where $\lambda(x, y, z) = x^2 + y^2 + z^2 - 2 xy - 2 xz - 2yz$ and the solid angle $\dd \Omega_n \equiv \dd \cos \theta_n\, \dd \varphi_n$ defines the direction of $\bm{p}_n$ in the frame where $p_a + p_b = (\sqrt{s}, \bm{0})$. 
+\hl{A derivation of {\eref{eq:recursive-phase-space-relation}} can be found in appendix {\ref{app:recursive-relation-derivation}}}.
 The upper limit is obtained by requiring that 
 \begin{align}
-    |\bm{p}_n|^2 = \frac{\lambda(s, M_{n-1}^2, m_n^2)}{4 s}
+    |\bm{p}_n|^2 = \frac{\lambda(s, M_{n-1}^2, m_n^2)}{4 s} \geq 0\ ,
 \end{align}
-be positive whereas the lower limit is threshold below which $R_{n-1}(M_{n-1}^2) = 0$.\footnotemark 
+whereas the lower limit is given by the threshold below which $R_{n-1}(M_{n-1}^2) = 0$.
+Both limits can be derived from physical considerations too.
  Repeated application of \eref{eq:recursive-phase-space-relation} yields 
 \begin{equation}
 \begin{aligned}
@@ -66,7 +78,7 @@ be positive whereas the lower limit is threshold below which $R_{n-1}(M_{n-1}^2)
     \frac{\sqrt{\lambda(M_{2}^2, m_1^2, m_{2}^2)}}{8M_{2}^2}. 
 \end{aligned}
 \end{equation}
-\newpage
+
 The important case for me is when $n = 3$:
 \begin{bluenv}{Phase space measure for $n = 3$}
     \vspace{-3ex}
@@ -89,8 +101,6 @@ In the above discussion we have considered $p_a$ and $p_b$ to be fixed.
 However, for my purposes I will also be integrating over $p_a$ and $p_b$.
 This case seems to be similar to the one considered in~\cite{Isaacson:2021xty} (cf. the example given between their eqs. (12) and (13)).
 
-\footnotetext{In eq. (3) of~\cite{Byckling:1969sx} the authors allude that the angular $\dd \Omega$ integrals can be performed. They do not perform the integrals because \emph{``the variables defining a momentum vector should appear explicitly if a Monte Carlo method is to be applied for the generation of events.''} In my case I think that we still can't do these integrals trivially because the matrix element depends on them, although I'm not 100\% sure if this is correct.}
-
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.6\linewidth]{figs/recursion-diagram.jpg}
@@ -106,10 +116,8 @@ This case seems to be similar to the one considered in~\cite{Isaacson:2021xty} (
 
 In sec~\ref{subsec:recursive-relation} we wrote the phase space integral in terms of invariant masses and angles of the three-momenta $\bm{p}_i$ defined in the center-of-mass frame where $\sum_{k=1}^{i} p_k = (M_{i}, \bm{0})$. 
 The matrix element in \eref{eq:matrix-element} is a function of the Lorentz invariants $(p_a \cdot p_1), \; (p_b \cdot p_3), \; (p_2 \cdot p_3)$, and $(p_b \cdot p_2) = (- (p_a - p_1 - p_2 - p_3) \cdot p_2)$. 
-It is cumbersome to write this matrix element explicitly in terms of the angles $\{ (\theta_i, \varphi_i) : i = 1, 2, \ldots, n\}$ so we would rather use kinematic Lorentz invariants analogous to the Mandelstam variables for $2 \rightarrow 2$ scattering\footnotemark.
+It is cumbersome to write this matrix element explicitly in terms of the angles $\{ (\theta_i, \varphi_i) : i = 1, 2, \ldots, n\}$ so we would rather use kinematic Lorentz invariants analogous to the Mandelstam variables for $2 \rightarrow 2$ scattering.
 To this end it is convenient to \hl{introduce the so-called `momentum transfers' $t_i \equiv Q_i^2 \equiv (p_a - p_1 - \cdots - p_i)^2 = (p_n + p_{n-1} + \cdots + p_{i + 1} - p_b)^2$}.
-
-\footnotetext{At least, I think that is the motivation for introducing these variables.}
 
 Some of the dot products (but not all) may be written exclusively in terms of the kinematic variables. For example,
 \begin{gather*}
@@ -136,9 +144,7 @@ It is worth describing in more detail the meaning of the angles $\varphi_1$ and 
 I realised on \hl{Aug 18 2023} that these azimuthal angles can't be measured from the same axis. 
 The reason for this is the derivation of \eref{eq:recursion-momentum-transfer} and \eref{eq:recursive-momentum-transfer-k} involved a step where we rewrote $\dd^3 Q_{n-1}$ as $\Qmag{n-1}^2 \, \dd \Qmag{n-1} \, \dd \cos \theta_{n-1} \dd \varphi_{n-1}$. 
 This transformation requires that $\theta_{n-1}$ be measured from a polar axis and $\varphi_{n-1}$ be measured in the plane perpendicular to that axis.
-Since $\theta_{i}$ is defined as the angle between $\Qvec{i}$ and $\Qvec{i+1}$ we find that $\varphi_{i}$ and $\varphi_{i+1}$ are not measured in the same plane.
-
-The result for $p_2 \cdot p_3$ in terms of the kinematic invariants $+$ the angles is presented in \appref{app:2-dot-3}.
+Since $\theta_{i}$ is defined as the angle between $\Qvec{i}$ and $\Qvec{i+1}$, $\varphi_{i}$ and $\varphi_{i+1}$ can not be measured in the same plane.
 
 To transform $R_n$ into a form in which the momentum transfers appear as variables we must consider the phase space integral as a function of $p_a$ and $-p_b \equiv Q_n$ separately: $R_n = R_n(p_a, Q_n)$. 
 Let $Q_i = p_a - p_1 - \cdots - p_i$ so that $p_i = Q_{i-1} - Q_i$. 
@@ -223,11 +229,32 @@ $\varphi_{n-1}$ defines the azimuthal angle of $\bm{Q}_{n-1}$ in the frame $p_a 
         & \phantom{=} - xy(z + u + v + w) - zu (x + y + v + w) - vw(x + y + z + u) \; .
     \end{aligned}
 \end{equation}
+In addition, the Dirac deltas impose the following relations hold: 
+\begin{bluenv}{Formulas for angles and magnitudes in terms of integration variables}
+    \vspace{-2ex}
+    \begin{align}
+        \Qmag{i} &= \frac{\sqrt{\lambda_i}}{2 m_a} \label{eq:Qmag-formula}\\
+        \varepsilon_i &= \frac{\sqrt{\Lambda_i}}{2 m_a} \label{eq:B-epsilon-formula}\\
+        \cos \theta_i &\equiv \frac{\Qvec{i}\cdot\Qvec{i+1}}{\Qmag{i}\Qmag{i+1}} 
+            =  \frac{\xi_i}{\sqrt{\lambda_i \lambda_{i+1}}} \label{eq:B-costheta-formula}\\
+        \sin\theta_i &= \sintheta{i}{i+1} \label{eq:sintheta-formula}
+    \end{align}
+    where
+    \begin{align}
+        \label{eq:lambda-definitions}
+        \lambda_i &\equiv \lambda(s_i, t_i, m_a^2) \\
+        \Lambda_i &\equiv \lambda_i + 4 m_a^2 t_i = (s_i - t_i - m_a^2)^2 \\
+        G_i &\equiv G(t_i, s_{i+1}, s_i, t_{i+1}, m_{i+1}^2, m_a^2) < 0 \\
+        \label{eq:xi-definition}
+        \xi_i &\equiv \sqrt{\Lambda_i \Lambda_{i+1}} - 2 m_a^2 (t_i + t_{i+1} - m_{i+1}^2) \; .
+    \end{align}
+\end{bluenv}
 
+The main result for this section is the phase space measure for the case of $3$ outgoing particles, which we highlight below.
 \begin{bluenv}{$R_n$ for $n = 3$}
     \vspace{-3ex}
     \begin{align}
-        \label{eq:recursive-phase-space-with-momentum-transfer-for-n=3}
+        \label{eq:recursive-phase-space-with-momentum-transfer-for-n-equal-3}
         R_3(s_3, t_3) 
             = \frac{1}{4\sqrt{\lambda(s_3, t_3, m_a^2)}}
               \int \frac{\dd s_2 \dd t_2 \dd \varphi_2}
@@ -241,81 +268,73 @@ $\varphi_{n-1}$ defines the azimuthal angle of $\bm{Q}_{n-1}$ in the frame $p_a 
     \end{gather}
 \end{bluenv}
 
-To use this method we rewrite the integrand by making the replacements:\todo{This is incorrect. In particular \eref{eq:energy-replacement-formula} doesn't work because the thermal distributions $f$ are not Lorentz invariant. The $E_i$ that shows up in \eref{eq:emissivity-integral} is the energy \emph{as seen in the rest frame of the NS}. Furthermore, \eref{eq:p2-dot-p3-replacement-rule} was derived using incorrect assumptions that are not corrected in the appendix.}
+To use this method we rewrite parts the integrand by making the replacements:
 \begin{align}
-    E_i &\rightarrow \frac{s_{i-1} - s_i - m_i^2}{2\sqrt{s_i}} \label{eq:energy-replacement-formula} \\ 
-    2 p_a \cdot p_1 &\rightarrow m_a^2 +  m_1^2 - t_1 \\
+    2 p_a \cdot p_1 &\rightarrow m_a^2 +  m_1^2 - t_1 \label{eq:pa-dot-p1-replacement-rule} \\
     2 p_a \cdot p_2 &\rightarrow s_2 - m_1^2 + t_1 - t_2 \\
     2 p_a \cdot p_3 &\rightarrow t_2 - t_3 - s_2 + s_3 \\
     2 p_1 \cdot p_2 &\rightarrow s_2 - m_1^2 - m_2^2 \\
     2p_b \cdot p_3 &\rightarrow m_3^2 + t_3 - t_2 \\
-    2p_b \cdot p_2 &\rightarrow 2 p_2 \cdot p_3 + m_2^2 + t_2 - t_1 \\
-    2 p_2 \cdot p_3 &\rightarrow  \label{eq:p2-dot-p3-replacement-rule}
-        \frac{1}{2 m_a^2} 
-        \bigg\{
-        % Q1 dot Q2
-        \sqrt{\Lambda_1 \Lambda_2}
-                - 
-                \frac{1}{\sqrt{\lambda_2 \lambda_3}}
-                \bigg[
-                    m_a^2 \sqrt{G_1 G_2} \cos (\varphi_1 - \varphi_2) \\
-                    &\hphantom{=\frac{1}{4 m_a^2}\bigg\{} + 
-                    \big(\sqrt{\Lambda_1 \Lambda_2} - 2 (t_1 + t_2 - m_2^2)\big)
-                    \big(\sqrt{\Lambda_2 \Lambda_3} - 2 (t_2 + t_3 - m_3^2)\big)
-                \bigg] \\
-        &\hphantom{=\frac{1}{4 m_a^2}\bigg\{} -
-        \bigg(
-        % Q1 dot Q3
-        \sqrt{\Lambda_1 \Lambda_3} - \sqrt{\frac{\lambda_3}{\lambda_2}} 
-                \big[
-                    \sqrt{\Lambda_1 \Lambda_2} - 2 m_a^2(t_1 + t_2 - m_2^2)
-                \big]
-        \bigg)
-        \bigg\} \\
-        &\hphantom{=}+
-        % Q2 dot Q3
-        \frac{1}{2}(t_3 - t_2 - m_3^2) \ .
+    2p_b \cdot p_2 &\rightarrow 2 p_2 \cdot p_3 + m_2^2 + t_2 - t_1  \ . \label{eq:pb-dot-p2-replacement-rule} 
 \end{align}
-where $\Lambda_i$ and $\lambda_i$ are defined in \eref{eq:app-lambda-definitions}.
+Then, we will explicitly generate the four-momenta $p_a^{NS}$, $p_b^{NS}$, $p_1^{NS}$, $p_2^{NS}$, $p_3^{NS}$ as seen in the rest frame of the neutron star by 
+\begin{enumerate}
+    \item Sampling $p_a^{NS}$ and $p_b^{NS}$ from the Fermi-Dirac distribution $f_{FD}(E_a^{NS})$ -- this means that we can drop those factors in the integrand.
+    \item Generating the outgoing particle momenta $p_i$ in the frame $p_a = (m_a, 0)$ and then boosting them into a frame where $p_a = p_a^{NS}$ to obtain $p_i^{NS}$.
+\end{enumerate}
 
-\footnotetext{$M_1^2 = m_1^2$,  $M_3^2 = s$ and  $t_3 = (-p_b)^2 = m_b^2$ are all constants, not integration variables.}  
-
-\newpage
-\begin{bluenv}{Random number generation for Monte Carlo}
-    To sample $s_i$ we generate a uniform random variable $r_i \sim \mathrm{U}(0,1)$ and compute
-    \begin{equation}
-        \sqrt{s_i} = r_i \left(\sqrt{s_n} - \sum_{j=1}^{n} m_j\right) + \sum_{j=1}^{n} m_j\ .
-    \end{equation}
-    Next, we take the generated value of $s_i$ (let's call it $\bar{s}_{i}$) and use it to calculate the upper and lower bounds from which we generate $t_i$.
-    \newline To do this we solve
-    $G(t_{i}, s_{i+1}, \bar{s}_{i}, t_{i+1}, m_{i+1}^2, m_a^2) = 0$ for $t_{i}$. 
-    This yields,
-    \begin{gather}
-        \begin{aligned}
-            t_{i}^{\pm} 
-            =\ 
-            &t_{i+1} + m_{i+1}^2 + \\
-            & \times 
-            \frac{
-                (\bar{s}_{i} - s_{i+1} - m_{i+1}^2)(t_{i+1} + s_{i+1} - m_a^2) \pm \sqrt{\lambda(\bar{s}_{i}, s_{i+1}, m_{i+1}^2)\lambda(s_{i+1},t_{i+1},m_a^2)}
-            }
-            {2\,s_{i+1}} \ .
-        \end{aligned} 
-    \end{gather}
-    So,
-    \begin{equation}
-        t_i^{\mathrm{gen}} = \gamma_i (t_i^+ - t_i^-) + t_i^-
-    \end{equation}
-    where $\gamma_i \sim \mathrm{U}(0,1)$ is another uniform random variable. 
-    This procedure requires us to weight the generated event by a factor of $(t_i^{+} - t_i^{-})$.
-
-    $\varphi_1$ and $\varphi_2$ are sampled independently from $\mathrm{U}(0,2\pi)$.
+% ====
+% SUBSECTION: Event generation and Monte Carlo integration 
+% ====
+\subsec{Monte Carlo integration using momentum transfers}
+\label{subsec:event-generation}
+So far we have rewritten the integral in \eref{eq:emissivity-integral} as 
+\begin{align}
+    \varepsilon_{3} &= \int f_a f_b (1 - f_1)(1 - f_2) 
+                    \, E_3 \sum_{\sigma,\sigma'} |\mathcal{M}|^2 
+                    \, \dd \Phi_3 
+                    \, \frac{\dd^3 p_a}{(2\pi)^3 2 E_a}
+                    \, \frac{\dd^3 p_b}{(2\pi)^3 2 E_b}
+\end{align}
+where $\dd \Phi_3 = (2\pi)^{-5} R_3$ is given by \eref{eq:recursive-phase-space-with-momentum-transfer-for-n-equal-3} and $\sum_{\sigma, \sigma'} |\mathcal{M}|^2$ is given by \eref{eq:matrix-element} with the replacements given in eqs.~(\ref{eq:pa-dot-p1-replacement-rule})--(\ref{eq:pb-dot-p2-replacement-rule}).
+Furthermore, it is understood that the energies that are to be plugged into the $f$ distributions are to be evaluated in the rest-frame of the neutron star. 
+Thus, we interpret $\dd^3 p_a$ as $\dd^3 p_a^{NS}$.  
+The momenta $p_a^{NS}$ and $p_b^{NS}$ will be sampled in the following way. 
+First, rewrite the ingoing momentum integrals
+\begin{align}
+    \frac{\dd^3 p_a}{2 E_a} &\rightarrow \frac{1}{2}\,\sqrt{E_a^2 - m_a^2} \, \dd E_a \, \dd \cos \theta_a \dd \varphi_a \\
+    \frac{\dd^3 p_b}{2 E_b} &\rightarrow \frac{1}{2}\,\sqrt{E_b^2 - m_b^2} \, \dd E_b \, \dd \cos \theta_b \dd \varphi_b\ .
+\end{align}
+Next, draw $E_a$ and $E_b$ from the distributions $f_a$ and $f_b$. 
+This is an example of importance sampling, so the factors of $f_a$ and $f_b$ in the integrand will be canceled out by sampling $E_{a,b}$ in this way.
+Sampling can be accomplished by generating realisations of the random variable $X \sim \mathrm{U}(0,1)$ and computing $E_a = F^{-1}(X)$ where $F(E_a) = \frac{1}{N}\int_0^{E_a} f(E) \, \dd E$ is the cumulative distribution function and $N = \int_0^\infty f(E) \, \dd E$ is a normalization factor. 
+These integrals can be performed analytically with the results
+\begin{bluenv}{Formulas for sampling ingoing particle energies (as seen in the rest-frame of the neutron star)}
+    \vspace{-2ex}
+    \begin{align}
+        N &= \int_0^\infty f(E) \, \dd E = \int_0^\infty \frac{1}{1 + e^{(E-\mu)/T}} \, \dd E = T \ln(1 + e^{\mu / T}) \ , \\
+        F(E_a) &= \frac{1}{N} \int_0^{E_a} f(E) \, \dd E = \frac{\ln ( \frac{1 + e^{\mu/T}}{1 + e^{-(E-\mu)/T}})}{\ln(1 + e^{\mu / T})} \ , \\
+        F^{-1}(x) &= -T \ln(1 + e^{\mu/T}) \exp{-x \ln(1 + e^{\mu/T}) - 1} + \mu \ .
+    \end{align}
 \end{bluenv}
+I verified these formulas by drawing 100,000 samples of $X$, evaluating $E_a = F^{-1}(X)$ for each, and plotting a histogram of the $E_a$ samples against the distribution $f_a / N$ as shown in \fref{fig:fermi-dirac-sampling}. 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\linewidth]{figs/fd-sampling.png}
+    \caption{
+        Verification of my method for sampling from a Fermi-Dirac distribution.
+        Histogram is on samples obtained using the method described in \sref{subsec:event-generation} and blue curve is $f_{FD}(E)$.
+        I chose fiducial values of $\mu = 10$ and $T = 1$. 
+    }
+    \label{fig:fermi-dirac-sampling}
+\end{figure}
+
+
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\linewidth]{figs/kinematic-variable-diagram.png}
     \caption{
-        Illustration of sampling from the physical region of parameter space dictated by the $\Theta(-G_i)$ step-functions in \eref{eq:recursive-phase-space-with-momentum-transfer-for-n=3}. 
+        Illustration of sampling from the physical region of parameter space dictated by the $\Theta(-G_i)$ step-functions in \eref{eq:recursive-phase-space-with-momentum-transfer-for-n-equal-3}. 
         \emph{(Left:)}
         Region of the $(t_2, s_2)$ plane where $G_2$ is negative (shaded blue).
         This corresponds to the physically allowed region of parameter space.
@@ -326,4 +345,65 @@ where $\Lambda_i$ and $\lambda_i$ are defined in \eref{eq:app-lambda-definitions
     }
     \label{<label>}
 \end{figure}
+
+\subsubsection{Momentum reconstruction}
+
+To sample $s_i$ we sample a uniform random variable $r_i \sim \mathrm{U}(0,1)$ and compute
+\begin{equation}
+    \sqrt{s_i} = r_i \left(\sqrt{s_n} - \sum_{j=1}^{n} m_j\right) + \sum_{j=1}^{n} m_j\ .
+\end{equation}
+Since we are integrating over $s_i$, not $\sqrt{s_i}$, sampling uniformly in $\sqrt{s_i}$ requires us to multiply the integrand by a factor of $2 \sqrt{s_i}$ since $\dd s = \dd (\sqrt{s})^2 = 2 \sqrt{s} \, \dd (\sqrt{s})$.
+
+Next, we take the generated value of $s_i$ (let's call it $\bar{s}_{i}$) and use it to calculate the upper and lower bounds from which we generate $t_i$.
+\newline To do this we solve
+$G(t_{i}, s_{i+1}, \bar{s}_{i}, t_{i+1}, m_{i+1}^2, m_a^2) = 0$ for $t_{i}$. 
+This yields,
+\begin{gather}
+    \begin{aligned}
+        t_{i}^{\pm} 
+        =\ 
+        &t_{i+1} + m_{i+1}^2 + \\
+        &
+        \frac{
+            (\bar{s}_{i} - s_{i+1} - m_{i+1}^2)(t_{i+1} + s_{i+1} - m_a^2) \pm \sqrt{\lambda(\bar{s}_{i}, s_{i+1}, m_{i+1}^2)\lambda(s_{i+1},t_{i+1},m_a^2)}
+        }
+        {2\,s_{i+1}} \ .
+    \end{aligned} 
+\end{gather}
+So,
+\begin{equation}
+    t_i^{\mathrm{gen}} = \gamma_i (t_i^+ - t_i^-) + t_i^-
+\end{equation}
+where $\gamma_i \sim \mathrm{U}(0,1)$ is another uniform random variable. 
+This procedure requires us to weight the generated event by a factor of $(t_i^{+} - t_i^{-})$. Finally, $\varphi_1$ and $\varphi_2$ are sampled independently from $\mathrm{U}(0,2\pi)$.
+
+Once $s_2$, $t_1$, $t_2$, $\varphi_1$, and $\varphi_2$ have been generated using the procedure described above we can reconstruct the outgoing momenta $p_i$ in the following way.
+First, calculate the components of $\bm{Q}_i$ in the rest frame of $a$. 
+In particular, the components are given by substituting eqs.~(\ref{eq:Qmag-formula}--\ref{eq:xi-definition}) into the following formulas,
+\begin{align}
+    \bm{Q}_2 &= 
+    |\bm{Q}_2|
+    ( \sin \theta_2 \cos \varphi_2, \,  
+      \sin \theta_2 \sin \varphi_2, \,
+      \cos \theta_2) \\
+    \bm{Q}_1 &= 
+    |\bm{Q}_1| R(\theta_2, \varphi_2)
+    ( \sin \theta_1 \cos \varphi_1, \,
+      \sin \theta_1 \sin \varphi_1, \,
+      \cos \theta_1) 
+\end{align}
+where $R(\theta_2, \varphi_2)$ is rotation matrix that takes $(0, 0, 1)$ into $(\sin \theta_2 \cos \varphi_2, \sin \theta_2 \sin\varphi_2, \cos \theta_2)$. 
+Next, demand calculate the energy-component of $Q_i$ as $Q_i^0 = \pm \sqrt{|\bm{Q}_i|^2 + t_i}$. 
+The sign is chosen by imposing the physical momenta have positive energy so, e.g., $(p_2)^0 = (Q_1^0 - Q_2^0) > 0$. 
+The way I have implemented this is to first compute the positive sign solutions $\varepsilon_i \equiv \sqrt{|\bm{Q}_i|^2 + t_i}$ and choose $\mathrm{sgn}(Q_i^0) = (-1)^{1 + \Theta(\varepsilon_1 - \varepsilon_2)}$, where $\Theta(x)$ is the Heaviside step function.
+The physical momenta are then given in the rest frame of $a$ frame by
+\begin{align}
+    p_1 &= (p_a - Q_1) \\
+    p_2 &= (Q_1 - Q_2) \\
+    p_3 &= (Q_2 + p_b) \ .
+\end{align}
+
+
+
+
 

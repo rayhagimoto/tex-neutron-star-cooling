@@ -12,14 +12,14 @@ The goal of this project is to evaluate the integral
     \begin{equation}
     \label{eq:emissivity-integral}
     \begin{aligned}
-        \varepsilon_{3'} = \int 
-            & f_1 f_2 (1 - f_{1'}) (1 - f_{2'}) (1 + f_{3'}) \\
-            &\times E_{3'} \,
-            \sum_{\sigma, \sigma'} | \mathcal{M} |^2 \,
-            \dd \Phi_3 \big( (p_1 + p_2)^2; 1', 2', 3'\big)
+        \varepsilon_3 = \int 
+            & f_a f_b (1 - f_1) (1 - f_2) (1 + f_3) \\
+            &\times E_3 \,
+            \overline{| \mathcal{M} |^2} \,
+            \dd \Phi_3 \big( (p_a + p_b)^2; m_1, m_2, m_3 \big)
             \,
-            \frac{\dd^3 p_1}{(2\pi)^3\,2 E_1}
-            \frac{\dd^3 p_2}{(2\pi)^3\,2 E_2} 
+            \frac{\dd^3 p_a}{(2\pi)^3\,2 E_a}
+            \frac{\dd^3 p_b}{(2\pi)^3\,2 E_b} 
             \; 
     \end{aligned}
     \end{equation}
@@ -41,28 +41,33 @@ where,
 \end{bluenv}
 is the Lorentz-invariant phase space measure, and
 \begin{align}
-    f_i &\equiv f_{FD}(E_i) \equiv \frac{1}{e^{(E_i - \mu_i)/T} + 1} \text{ for } i = 1, 2, 1', 2' \\
-    f_{3'} &\equiv f_{BE}(E_i) \equiv \frac{1}{e^{(E_{3'} + \mu_{3'})/T} + 1}
+    f_i &\equiv f_{FD}(E_i) \equiv \frac{1}{e^{(E_i - \mu_i)/T} + 1} \text{ for } i = a, b, 1, 2 \label{eq:fermi-dirac}\\
+    f_3 &\equiv f_{BE}(E_i) \equiv \frac{1}{e^{(E_3 + \mu_3)/T} + 1} \label{eq:bose-einstein}
 \end{align}
 are thermal distributions which show up due to Pauli blocking and Bose enhancement . 
 The spin-summed matrix element squared is given by
 \begin{bluenv}{Spin-summed matrix element}
     \begin{equation}
         \label{eq:matrix-element}
-        \sum_{\sigma, \sigma'} | \mathcal{M} |^2 
+        \overline{| \mathcal{M} |^2} 
             = 
-            \frac{128 \, g^2_{ae\mu} e^4}{(m_1^2 - m_{1'}^2)^2} \,
+            \frac{128 \, g^2_{ae\mu} e^4}{(m_a^2 - m_1^2)^2} \,
             \frac{
-                 (p_1 \cdot p_{1'} - m_1 m_{1'})
-                (p_2 \cdot p_{3'})
-                (p_{2'} \cdot p_{3'})
+                 (p_a \cdot p_1 - m_a m_1)
+                (p_b \cdot p_3)
+                (p_2 \cdot p_3)
             }
             {
-                (p_2 - p_{2'})^4
+                (p_b - p_2)^4
             } \; \, .
     \end{equation}
 \end{bluenv}
 
+Some comments before we move on:
+\begin{enumerate}
+    \item The axions (denoted in this introduction by $3$) are effectively free-streaming so the Bose-enhancement factor $(1 + f_3)$ will be ignored.
+    \item The thermal factors $f_i$ are not Lorentz invariant (unlike the spin-summed matrix element and the integration measure) so we emphasize that \hl{the energies appearing in eqs. {(\ref{eq:fermi-dirac})} and  {(\ref{eq:bose-einstein})} are measured in the rest frame of the neutron star}. This fact will be very important to remember later.
+\end{enumerate}
 
 %====
 % SUBSECTION: Direct integration
@@ -71,69 +76,68 @@ The spin-summed matrix element squared is given by
 \label{subsec:direct-momentum-integration}
 \emph{The first strategy I used to evaluate this integral was to do the integration directly in terms of the momentum variables. Below are the notes I wrote detailing my strategy.}
 
-We can use the momentum conserving Dirac delta to evaluate the $\bm{p}_{2'}$ integral, setting
+We can use the momentum conserving Dirac delta to evaluate the $\bm{p}_2$ integral, setting
 \begin{align}
-    \bm{p}_{2'} = \bm{p}_{1} + \bm{p}_{2} - \bm{p}_{1'} - \bm{p}_{3'}.
+    \bm{p}_2 = \bm{p}_a + \bm{p}_b - \bm{p}_1 - \bm{p}_3.
 \end{align}
-We now choose to align the $z$-axis with $\bm{p}_1$ and measure angles with respect to this axis. 
-Converting to spherical polar coordinates gives, for example, $\dd^3 p_{3'} = p_{3'}^2 \, \dd p_{3'} \, \dd \cos \theta_{13'} \, \dd \phi_{13'}$
-\footnote{The angle $\phi_{13'}$ is not measured with respect to $\bm{p}_1$, it is measured to some axis orthogonal to $\bm{p}_1$. We don't need to define that axis explicitly as long as the other angles $\phi_{1i}$ are measured with respect to the same axis.}
+We now choose to align the $z$-axis with $\bm{p}_a$ and measure angles with respect to this axis. 
+Converting to spherical polar coordinates gives, for example, $\dd^3 p_3 = p_3^2 \, \dd p_3 \, \dd \cos \theta_{13'} \, \dd \phi_{13'}$
 . 
-Then the energy conserving Dirac delta can be used to evaluate the $\dd p_{3'}$ integral in the following way. 
+Then the energy conserving Dirac delta can be used to evaluate the $\dd p_3$ integral in the following way. 
 First, we use $E = \sqrt{p^2 + m^2}$ to rewrite the masses. 
-Then we use momentum conservation to make the replacement $\bm{p}_{2'} \rightarrow \bm{p}_{1} + \bm{p}_{2} - \bm{p}_{1'} - \bm{p}_{3'}$:
+Then we use momentum conservation to make the replacement $\bm{p}_2 \rightarrow \bm{p}_a + \bm{p}_b - \bm{p}_1 - \bm{p}_3$:
 \begin{align*}
-    &E_1 + E_2 
-    = E_{1'} + E_{2'} + E_{3'}\\
-    &\Rightarrow \sqrt{p_1^2 + m_1^2} + \sqrt{p_{2}^2 + m_2^2} =
-        \sqrt{p_{1'}^2 + m_{1'}^2} + 
-        \sqrt{p_{2'}^2 + m_{2'}^2} + 
-        \sqrt{p_{3'}^2 + m_{3'}^2}\\
-    &\Rightarrow \sqrt{p_1^2 + m_1^2} + \sqrt{p_{2}^2 + m_2^2} =
-        \sqrt{p_{1'}^2 + m_{1'}^2} + 
-        \sqrt{(\bm{p}_{1} + \bm{p}_{2} - \bm{p}_{1'} - \bm{p}_{3'})^2 + m_{2'}^2} + 
-        \sqrt{p_{3'}^2 + m_{3'}^2}. \numberthis{} \label{eq:p3p-equation-1}
+    &E_a + E_b 
+    = E_1 + E_2 + E_3\\
+    &\Rightarrow \sqrt{p_a^2 + m_a^2} + \sqrt{p_b^2 + m_b^2} =
+        \sqrt{p_1^2 + m_1^2} + 
+        \sqrt{p_2^2 + m_2^2} + 
+        \sqrt{p_3^2 + m_3^2}\\
+    &\Rightarrow \sqrt{p_a^2 + m_a^2} + \sqrt{p_b^2 + m_b^2} =
+        \sqrt{p_1^2 + m_1^2} + 
+        \sqrt{(\bm{p}_a + \bm{p}_b - \bm{p}_1 - \bm{p}_3)^2 + m_2^2} + 
+        \sqrt{p_3^2 + m_3^2}. \numberthis{} \label{eq:p3p-equation-1}
 \end{align*} 
-We would like to solve eqn. (\ref{eq:p3p-equation-1}) for $p_{3'}$, but there is a problem coming from the fact that $p_{3'}$ appears under two square root symbols which makes it impossible to get an expression of the form $p_{3'} = \cdots$. 
-Instead, we will make the approximation that because $p_{3'} \ll p_{i}$ for $i \in \{1, 2, 1', 2'\}$ that we can ignore the $p_{3'}$ that shows up in $\sqrt{(\bm{p}_{1} + \bm{p}_{2} - \bm{p}_{1'} - \bm{p}_{3'})^2 + m_{2'}^2}$~. 
-The result we obtain when solving for $p_{3'}$ is then
+We would like to solve eqn. (\ref{eq:p3p-equation-1}) for $p_3$, but there is a problem coming from the fact that $p_3$ appears under two square root symbols which makes it impossible to get an expression of the form $p_3 = \cdots$. 
+Instead, we will make the approximation that because $p_3 \ll p_{i}$ for $i \in \{1, 2, 1', 2'\}$ that we can ignore the $p_3$ that shows up in $\sqrt{(\bm{p}_a + \bm{p}_b - \bm{p}_1 - \bm{p}_3)^2 + m_2^2}$~. 
+The result we obtain when solving for $p_3$ is then
 \begin{equation}
 \begin{aligned}
-    p_{3'} = 
+    p_3 = 
         \bigg[
-            &m_1^2 + m_{1'}^2 + m_2^2 + m_{2'}^2 - m_{3'}^2 + 2 p_{1}^2 - 2 p_{1} p_{1'} c_{11'} + 2 p_{1'}^2 - 2 E_1 E_{1'} \\
-            &+ 2 p_1 p_2 c_{12} - 2 p_{2} p_{1'} c_{21'} + 2 p_2^2 + 2 E_1 - 2 E_{1'} E_2 \\
-            &- 2 E_1 E_{2'}(p_1, p_{2}, p_{1'}, c_{11'}, c_{12}, c_{21'})
-            + 2 E_{1'} E_{2'}(p_1, p_{2}, p_{1'}, c_{11'}, c_{12}, c_{21'})\\
-            &- 2 E_2 E_{2'}(p_1, p_{2}, p_{1'}, c_{11'}, c_{12}, c_{21'})
+            &m_a^2 + m_1^2 + m_b^2 + m_2^2 - m_3^2 + 2 p_a^2 - 2 p_a p_1 c_{11'} + 2 p_1^2 - 2 E_a E_1 \\
+            &+ 2 p_a p_b c_{12} - 2 p_b p_1 c_{21'} + 2 p_b^2 + 2 E_a - 2 E_1 E_b \\
+            &- 2 E_a E_2(p_a, p_b, p_1, c_{11'}, c_{12}, c_{21'})
+            + 2 E_1 E_2(p_a, p_b, p_1, c_{11'}, c_{12}, c_{21'})\\
+            &- 2 E_b E_2(p_a, p_b, p_1, c_{11'}, c_{12}, c_{21'})
         \bigg]^{1/2}
 \end{aligned}
 \end{equation}
 where $E_i \equiv \sqrt{p_i^2 + m_i^2}$, $c_{ij} \equiv \cos \theta_{ij} \equiv \bm{p}_i \cdot \bm{p}_j / (p_i p_j)$ and 
 \begin{align}
-    E_{2'}(p_1, p_{2}, p_{1'}, c_{11'}, c_{12}, c_{21'}) = \sqrt{p_1^2  - 2 p_1 p_{1'} c_{11'} + p_{1'}^2  + 2 p_{1} p_{2} c_{12} - 2 p_2 p_{1'} c_{21'} + p_2^2 + m_{2'}^2}.    
+    E_2(p_a, p_b, p_1, c_{11'}, c_{12}, c_{21'}) = \sqrt{p_a^2  - 2 p_a p_1 c_{11'} + p_1^2  + 2 p_a p_b c_{12} - 2 p_b p_1 c_{21'} + p_b^2 + m_2^2}.    
 \end{align}
-Now that we have an expression for $p_{3'}$ the requirement that $p_{3'}$ must be real and non-negative restricts the domain of integration of the other variables. 
+Now that we have an expression for $p_3$ the requirement that $p_3$ must be real and non-negative restricts the domain of integration of the other variables. 
 \hl{I am not sure how to derive the new limits so I got stuck here.}
 
 
-% ====
-% SUBSECTION: Wisdom from Weinberg
-% ==== 
-\subsec{Weinberg's wisdom}
-\label{subsec:Weinberg}
+% % ====
+% % SUBSECTION: Wisdom from Weinberg
+% % ==== 
+% \subsec{Weinberg's wisdom}
+% \label{subsec:Weinberg}
 
-\hl{Update: 11 Aug 2023:} I talked to Hong-Yi today and he pointed out page 141 of Weinberg QFT vol. I where the following treatment is done for the outgoing particle phase space measure.
+% \hl{Update: 11 Aug 2023:} I talked to Hong-Yi today and he pointed out page 141 of Weinberg QFT vol. I where the following treatment is done for the outgoing particle phase space measure.
 
-\begin{enumerate}
-    \item Use momentum conservation to eliminate one of the momenta, e.g. $\pvec[1]$.
-    \item Rewrite integrals over other two momenta in spherical polar coords so that $\dd^3 p_2 \, \dd^3 p_3 = \pmag[2]^2 \dd \pmag[2] \, \pmag[3]^2 \dd \pmag[3] \dd \Omega_3 \, \dd \phi_{23} \, \dd \cos \theta_{23}$ .
-    \item $\cos \theta_{23}$ is then fixed by energy conservation:
-        \begin{align}
-            \sqrt{
-                \pmag[2]^2 + 2\pmag[2]\pmag[3] \cos \theta_{23} + \pmag[3]^2 + m_1^2
-            }
-            + \sqrt{\pmag[2]^2 + m_2^2} + \sqrt{\pmag[3]^2 + m_3^2} = E .
-        \end{align}
-    \item This yields $\delta^4 ( p_{\mathrm{in}} - p_{\mathrm{out}}) \dd \beta \rightarrow \pmag[2] \dd \pmag[2] \pmag[3] \dd \pmag[3] E_1 \dd \Omega_3 \dd \phi_{23}$. Rewriting in terms of energies gives $E_1 E_2 E_3 \dd E_2 \dd E_3 \dd \Omega_{3} \dd \phi_{23}$ .
-\end{enumerate}
+% \begin{enumerate}
+%     \item Use momentum conservation to eliminate one of the momenta, e.g. $\pvec[1]$.
+%     \item Rewrite integrals over other two momenta in spherical polar coords so that $\dd^3 p_b \, \dd^3 p_3 = \pmag[2]^2 \dd \pmag[2] \, \pmag[3]^2 \dd \pmag[3] \dd \Omega_3 \, \dd \phi_{23} \, \dd \cos \theta_{23}$ .
+%     \item $\cos \theta_{23}$ is then fixed by energy conservation:
+%         \begin{align}
+%             \sqrt{
+%                 \pmag[2]^2 + 2\pmag[2]\pmag[3] \cos \theta_{23} + \pmag[3]^2 + m_a^2
+%             }
+%             + \sqrt{\pmag[2]^2 + m_b^2} + \sqrt{\pmag[3]^2 + m_3^2} = E .
+%         \end{align}
+%     \item This yields $\delta^4 ( p_{\mathrm{in}} - p_{\mathrm{out}}) \dd \beta \rightarrow \pmag[2] \dd \pmag[2] \pmag[3] \dd \pmag[3] E_a \dd \Omega_3 \dd \phi_{23}$. Rewriting in terms of energies gives $E_a E_b E_3 \dd E_b \dd E_3 \dd \Omega_{3} \dd \phi_{23}$ .
+% \end{enumerate}

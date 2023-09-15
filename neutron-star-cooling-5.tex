@@ -1,39 +1,39 @@
-%====
-% SECTION: SOFTWARE PACKAGES 
-%====
-\section{CompHEP and MADGRAPH5}
-\label{sec:software}
+% %====
+% % SECTION: SOFTWARE PACKAGES 
+% %====
+% \section{CompHEP and MADGRAPH5}
+% \label{sec:software}
 
-%----
-% SUBSECTION: CompHEP
-%----
-\subsec{\code{CompHEP}}
-\label{subsec:comphep}
-\newcommand{\comphep}[1][]{\code{CompHEP}}
-While I was looking for ways to do the integral I found a software called \comphep~\cite{Boos:1994xb} which does a lot of the things I am interested in doing. 
-\comphep is a ``a package for evaluation of Feynman diagrams, integration over multi-particle phase space and event generation''. 
-It allows the user to specify a Lagrangian and then it can generate tree level Feynman diagrams for a user-specified process, along with C and Fortran code to evaluate matrix elements. 
-It can even compute cross-sections/other observables.
-\comphep has two main backbones: (i) symbolic calculations (ii) numerical calculations.
+% %----
+% % SUBSECTION: CompHEP
+% %----
+% \subsec{\code{CompHEP}}
+% \label{subsec:comphep}
+% \newcommand{\comphep}[1][]{\code{CompHEP}}
+% While I was looking for ways to do the integral I found a software called \comphep~\cite{Boos:1994xb} which does a lot of the things I am interested in doing. 
+% \comphep is a ``a package for evaluation of Feynman diagrams, integration over multi-particle phase space and event generation''. 
+% It allows the user to specify a Lagrangian and then it can generate tree level Feynman diagrams for a user-specified process, along with C and Fortran code to evaluate matrix elements. 
+% It can even compute cross-sections/other observables.
+% \comphep has two main backbones: (i) symbolic calculations (ii) numerical calculations.
 
-The main tasks performed by the symbolic part are
-\begin{enumerate}[itemsep=-2ex]
-    \item Select a process by specifying in and out states for decays into up to $5$ outgoing particles or collisions of $2 \rightarrow 2, \  2 \rightarrow 3, \  2 \rightarrow 4$.
-    \item Generate Feynman diagrams.
-    \item Delete unwanted diagrams.
-    \item Compute S-matrix elements.
-    \item Save symbolic results so they can be further analysed in \code{Mathematica}.
-    \item Generate C and Fortran code for the matrix elements to be used in numerical studies.
-\end{enumerate}
+% The main tasks performed by the symbolic part are
+% \begin{enumerate}[itemsep=-2ex]
+%     \item Select a process by specifying in and out states for decays into up to $5$ outgoing particles or collisions of $2 \rightarrow 2, \  2 \rightarrow 3, \  2 \rightarrow 4$.
+%     \item Generate Feynman diagrams.
+%     \item Delete unwanted diagrams.
+%     \item Compute S-matrix elements.
+%     \item Save symbolic results so they can be further analysed in \code{Mathematica}.
+%     \item Generate C and Fortran code for the matrix elements to be used in numerical studies.
+% \end{enumerate}
 
-The numerical part, on the other hand, performs Monte Carlo integration and event generation. 
-The main tasks performed are:
-\begin{enumerate}[itemsep=-2ex]
-    \item Choose phase space kinematic variables (\hl{idk what this means yet})
-    \item Introduce kinematic cuts over squared momentum transfers (\hl{not sure what the significance of this is})
-    \item Perform regularization to remove sharp peaks in matrix elements.
-    \item Calculate distributions, cross-sections, or particle width using Monte Carlo methods.
-    \item Perform integration, taking into account structure functions for ingoing particles.
-    \item Event generation.
-\end{enumerate}
+% The numerical part, on the other hand, performs Monte Carlo integration and event generation. 
+% The main tasks performed are:
+% \begin{enumerate}[itemsep=-2ex]
+%     \item Choose phase space kinematic variables (\hl{idk what this means yet})
+%     \item Introduce kinematic cuts over squared momentum transfers (\hl{not sure what the significance of this is})
+%     \item Perform regularization to remove sharp peaks in matrix elements.
+%     \item Calculate distributions, cross-sections, or particle width using Monte Carlo methods.
+%     \item Perform integration, taking into account structure functions for ingoing particles.
+%     \item Event generation.
+% \end{enumerate}
 

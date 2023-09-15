@@ -39,31 +39,7 @@ To obtain this formula we first pick to align the $z$-axis with $\Qvec{3}$ so th
     \Qvec{2} &= \Qmag{2} (\cos \varphi_2 \sin \theta_2 \hat{\bm{i}} + \sin \varphi_2 \sin \theta_2 \hat{\bm{j}} + \cos \theta_2 \hat{\bm{k}}) \\
     \Qvec{3} &= \Qmag{3} \hat{\bm{k}} \; .
 \end{align}
-Then, 
-\begin{equation}
-    \frac{\Qvec{1}\cdot\Qvec{2} }{\Qmag{1}\Qmag{2}}\equiv \cos \theta_1 = \sin \theta_2  \cos(\varphi_1 - \varphi_2) \sin \theta_{13} + \cos\theta_2 \cos\theta_{13} .
-\end{equation}
-This can be rearranged to solve for $\theta_{13}$ to obtain
-\begin{equation}
-    \cos \theta_{13} = \frac{\cos \theta_1 \cos \theta_2 \pm \sin \theta_2 \cos(\varphi_1 - \varphi_2) \sqrt{\cos^2 \theta_2 + \cos^2(\varphi_1 - \varphi_2) \sin^2 \theta_2 - \cos^2 \theta_1}}{\cos^2 \theta_2 + \cos^2(\varphi_1 - \varphi_2) \sin^2 \theta_2} \; .
-\end{equation}
-Substituting $\cos \theta_i$ and $\sin \theta_i$ using eqs.~(\ref{eq:B-costheta-formula}) and~(\ref{eq:B-sintheta-formula}) yields
-\begin{equation}
-    \cos \theta_{13} =
-    \frac
-        {   \sqrt{\frac{\lambda_3}{\lambda_1}} \xi_1 \xi_2
-            +
-            \eta_2
-            \sqrt{\eta_2^2 - \frac{\lambda_3}{\lambda_1}\xi_1^2 + \xi_2^2}
-        }
-        {
-            \xi_2^2 +\eta_2^2
-        }
-\end{equation}
-where
-\begin{equation}
-    \eta_2^2 \equiv (-G_2) m_a^2 \cos^2(\varphi_1 - \varphi_2) \; .
-\end{equation}
+
 \reversemarginpar\marginnote{Note that in~\cite{Byckling:1969sx} there is a typo in their eq. (12b): they are missing a factor of $4$ which is present in my \eref{eq:B-sintheta-formula}.}
 \begin{bluenv}{Formulas for angles and magnitudes in terms of integration variables}
     \vspace{-2ex}

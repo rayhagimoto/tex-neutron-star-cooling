@@ -44,23 +44,47 @@ is the Lorentz-invariant phase space measure, and
     f_i &\equiv f_{FD}(E_i) \equiv \frac{1}{e^{(E_i - \mu_i)/T} + 1} \text{ for } i = a, b, 1, 2 \label{eq:fermi-dirac}\\
     f_3 &\equiv f_{BE}(E_i) \equiv \frac{1}{e^{(E_3 + \mu_3)/T} + 1} \label{eq:bose-einstein}
 \end{align}
-are thermal distributions which show up due to Pauli blocking and Bose enhancement . 
-The spin-summed matrix element squared is given by
+are thermal distributions which show up due to Pauli blocking and Bose enhancement. 
+$\overline{|\mathcal{M}|^2}$ depends on the axion emission channel: (i) $l + p \rightarrow l' + p + a$, (ii) $l + l \rightarrow l' + l + a$, (iii) $l + l' \rightarrow l + l + a$, where $l, l'$ denote either $e$ or $\mu$, and $l' \neq l$.
+The matrix elements are
 \begin{bluenv}{Spin-summed matrix element}
-    \begin{equation}
-        \label{eq:matrix-element}
-        \overline{| \mathcal{M} |^2} 
-            = 
-            \frac{128 \, g^2_{ae\mu} e^4}{(m_a^2 - m_1^2)^2} \,
-            \frac{
-                 (p_a \cdot p_1 - m_a m_1)
-                (p_b \cdot p_3)
-                (p_2 \cdot p_3)
-            }
-            {
-                (p_b - p_2)^4
-            } \; \, .
-    \end{equation}
+\vspace{-7px}
+\begin{align}
+    \label{eq:lp-matrix-element}
+    \overline{| \mathcal{M}^{(lp)} |^2} 
+    &= 
+    - \frac{128 \, g^2_{ae\mu} e^4}{(m_a^2 - m_1^2)^2} \,
+        \frac{
+            (p_a \cdot p_1 + m_a m_1)
+            (p_b \cdot p_3)
+            (p_2 \cdot p_3)
+        }
+        {
+            (p_b - p_2)^4
+        } \\
+    \label{eq:ll-matrix-element}
+    \overline{| \mathcal{M}^{(ll)} |^2} 
+        &= 
+        \overline{| \mathcal{M}^{(lp)} |^2} 
+        + (a \leftrightarrow b) 
+        + \mathcal{T}^{(ll)} \\
+    \label{eq:llp-matrix-element}
+    \overline{| \mathcal{M}^{(ll')} |^2} 
+        &= 
+        \overline{| \mathcal{M}^{(lp)} |^2} 
+        + (1 \leftrightarrow 2) 
+        + \mathcal{T}^{(ll')} 
+\end{align}
+\begin{align*}
+    \mathcal{T}^{(ll)} 
+    = 
+    &\frac{64 g_{ae\mu}^2 e^4}{(m_a^2 - m_1^2)^2} \, (p_2 \cdot p_3) \, \times\\
+    &\frac{(p_b \cdot p_1 + m_b m_1)(p_a \cdot p_3) + (p_a \cdot p_1 + m_a m_1)(p_b \cdot p_3) - (p_a \cdot p_b + m_a m_b) (p_1 \cdot p_3) }{(p_a  - p_2)^2 \, (p_b - p_2)^2}
+\end{align*}
+$\mathcal{T}^{(ll')}$ is given by $\mathcal{T}^{(ll)}$ with the replacements
+$a \leftrightarrow 1$ and $b \leftrightarrow 2$.
+
+We use a mostly plus metric signature.
 \end{bluenv}
 
 Some comments before we move on:
@@ -73,7 +97,7 @@ Some comments before we move on:
 % SUBSECTION: Direct integration
 %====
 \subsec{Integration in terms of momentum variables (didn't work)}
-\label{subsec:direct-momentum-integration}
+% \label{subsec:direct-momentum-integration}
 \emph{The first strategy I used to evaluate this integral was to do the integration directly in terms of the momentum variables. Below are the notes I wrote detailing my strategy.}
 
 We can use the momentum conserving Dirac delta to evaluate the $\bm{p}_2$ integral, setting

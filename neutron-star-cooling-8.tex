@@ -1,0 +1,34 @@
+\subsec{Extension to $m_3 > 0$}
+Using the dumb method I was able to reproduce Hong Yi's results. 
+Now I want to extend this method to cover the case when $m_3 > 0$. 
+This means that I can't use $E_3 = \pmag[3]$ anymore.
+Consider the expression
+\begin{align}
+    E_a + E_b - E_1 
+    = 
+    \sqrt{\pmag[3]^2 - 2 P_z \pmag[3] + |\bm{P}|^2 + m_2^2}
+    + \sqrt{\pmag[3]^2 + m_3^2} \, .
+\end{align}
+Here, all variables except $\pmag[3]$ have been fixed so it is in the form of
+\begin{align}
+    C &= \sqrt{x^2 - 2 b x + a^2 + c^2} + \sqrt{x^2 + d^2} \\
+    &= \sqrt{(x - b)^2 +a^2 - b^2 + c^2} + \sqrt{x^2 + d^2} \, ,
+\end{align}
+where $|b| \leq a$.
+I need to find the value of $x$ that makes this equation true, assuming such a value exists. 
+This can be thought of as finding the root of the expression $g(x) = f(x) - C$ where $f(x) = \sqrt{(x-b)^2 + a^2 - b^2 + c^2} + \sqrt{x^2 + d^2}$ and $C$ is the constant.   
+For large $x$ the function $f(x)$ goes to $+\infty$. Therefore a solution only exists if the minimum value of $f(x)$ is less than or equal to $C$.
+This motivates a study of the global minimum of $f(x)$. 
+Moreover, since $x$ corresponds to $\pmag[3]$ `physical' solutions require $x > 0$.
+The tl;dr is that the minimum of $f(x)$ occurs at $x_* = 0$ unless both $b$ and $d$ are nonzero and positive. 
+In that case,
+\begin{align}
+    x_* 
+    &= 
+    \begin{cases}
+        \frac{bd (\sqrt{a^2 - b^2 + c^2} - d)}{a^2 - b^2 + c^2 - d^2}  \quad \text{for } d < c \\
+        \frac{bd (d - \sqrt{a^2 - b^2 + c^2})}{d^2 - (a^2 - b^2 + c^2)} \quad \text{for } d > \sqrt{a^2 - b^2 + c^2}
+    \end{cases} \\
+    &= 
+    \frac{b d}{\sqrt{a^2 - b^2 + c^2} + d}
+\end{align}
